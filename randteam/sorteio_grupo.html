@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteio de Grupos</title>
+    <link rel="stylesheet" href="css/grupo.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="../index.html">
+        <img src="images/logo.png" alt="Logo" class="logo"
+      /></a>
+    </header>
+
+    <div class="container">
+      <div class="textarea-group">
+        <textarea id="nomes" placeholder="Insira os nomes..."></textarea>
+        <button onclick="limparNomes()" class="custom-btn">Apagar Nomes</button>
+      </div>
+
+      <div class="textarea-group">
+        <textarea id="temas" placeholder="Insira os temas..."></textarea>
+        <button onclick="limparGrupos()" class="custom-btn">
+          Apagar Temas
+        </button>
+      </div>
+
+      <div id="left">
+        <button onclick="sortearGrupos()" class="custom-btn" id="btnSortear">
+          Sortear
+        </button>
+        <span id="contador" style="margin-left: 10px; display: none"></span>
+      </div>
+
+      <div id="resultado"></div>
+      <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
+        Baixar PDF
+      </button>
+    </div>
+    <nav class="nav">
+      <a href="../index.html" class="custom-btn">Voltar</a>
+    </nav>
+    <script src="js/grupo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,530 @@
+/* Tela de Carregamento */
+#loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid white;
+  border-top: 5px solid green;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Background Animado */
+body {
+  background: linear-gradient(-45deg, #030411, #050f40, #072172);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Botões Modernos */
+/* Container principal */
+.main {
+  display: flex;
+  justify-content: flex-start; /* Alinha os itens no início */
+  align-items: flex-start; /* Alinha os itens no topo */
+  gap: 20px; /* Espaço entre os itens */
+  flex-wrap: nowrap; /* Mantém os itens em uma única linha */
+  padding: 20px;
+  overflow-x: auto; /* Permite rolagem horizontal se necessário */
+}
+
+/* Cada item (imagem + botão) */
+.item {
+  text-align: center; /* Centraliza o conteúdo */
+  border: 2px solid #333; /* Borda moderna */
+  border-radius: 15px; /* Bordas arredondadas */
+  padding: 10px;
+  transition: transform 0.3s ease-in-out; /* Animação ao passar o mouse */
+  flex: 0 0 auto; /* Impede que os itens cresçam ou encolham */
+}
+
+.item:hover {
+  transform: scale(1.05); /* Efeito de aumento suave ao passar o mouse */
+}
+
+/* Estilo das imagens */
+.main img {
+  width: 200px; /* Tamanho menor para as imagens */
+  height: 200px;
+  border-radius: 10px; /* Bordas arredondadas nas imagens */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.main img:hover {
+  opacity: 1;
+  transform: scale(1.1); /* Aumento suave da imagem ao passar o mouse */
+}
+
+/* Estilo dos botões */
+.custom-btn {
+  text-decoration: none;
+  color: white;
+  font-size: 16px; /* Tamanho de fonte menor */
+  font-weight: bold;
+  padding: 8px 16px; /* Padding menor */
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: list-item; /* Faz o botão ocupar toda a largura do container */
+  width: auto; /* Largura automática */
+
+  margin-top: 10px; /* Espaço entre a imagem e o botão */
+}
+
+.custom-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+  color: rgb(13, 155, 211);
+}
+
+/* Animação de clique com explosão de cores */
+@keyframes colorExplosion {
+  0% {
+    background: rgba(3, 206, 162, 0.1);
+    box-shadow: 0 0 0 rgba(4, 165, 152, 0.5);
+  }
+  50% {
+    background: rgba(3, 175, 123, 0.8); /* Cor laranja */
+    box-shadow: 0 0 20px rgba(26, 248, 182, 0.8);
+  }
+  100% {
+    background: rgba(13, 161, 219, 0.1);
+    box-shadow: 0 0 0 rgba(3, 224, 231, 0.5);
+  }
+}
+
+/* Aplicar animação ao clicar */
+.custom-btn:active {
+  animation: colorExplosion 0.5s ease-in-out;
+}
+/* Aplicar animação ao clicar */
+
+/* Social Icons */
+.social-icons img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+  transition: transform 0.3s ease-in-out;
+}
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Logo */
+.logo {
+  width: 250px;
+}
+
+/* Estilo do Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #020c1b, #03224c);
+  border-bottom: 2px solid #00e5ff;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+/* Estilizando a Logo */
+.logo {
+  width: 250px;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/* Estilo do Título (H1) */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  animation: colorChange 3s infinite;
+}
+
+/* Animação para mudar a cor do H1 */
+@keyframes colorChange {
+  0% {
+    color: #00e5ff;
+  }
+  50% {
+    color: #ff0055;
+  }
+  100% {
+    color: #00ff88;
+  }
+}
+
+/* Estilizando a Navegação */
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Estilizando o Footer */
+.footer {
+  background: linear-gradient(90deg, #020c1b, #03224c);
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid #00e5ff;
+  box-shadow: 0 -4px 15px rgba(0, 229, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito de brilho nos links */
+.nav-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Efeito Neon nos links ao passar o mouse */
+.nav-links a:hover {
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+}
+
+/* Ícones Sociais */
+.social-icons {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons img {
+  width: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efeito de zoom e brilho nos ícones ao passar o mouse */
+.social-icons img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #00e5ff);
+}
+
+/* Desenvolvedor */
+.developer {
+  font-size: 16px;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Animação Neon no Nome */
+.developer span {
+  font-weight: bold;
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
+  }
+  100% {
+    text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+  }
+}
+
+/* Menu Hamburguer (para telas menores) */
+.menu-icon {
+  display: none; /* Escondido por padrão */
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Media Queries para Responsividade */
+
+/* Dispositivos móveis (até 767px) */
+@media (max-width: 767px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .logo {
+    width: 150px;
+    margin-bottom: 10px;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+  }
+
+  .custom-btn {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .footer {
+    padding: 10px;
+  }
+
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Estilos Gerais */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #020c1b, #03224c);
+  border-bottom: 2px solid #00e5ff;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+  position: relative; /* Para posicionar o menu corretamente */
+}
+
+.logo {
+  width: 250px;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+#animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #00e5ff;
+  }
+  50% {
+    color: #ff0055;
+  }
+  100% {
+    color: #00ff88;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.menu-icon {
+  display: none; /* Escondido por padrão */
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Estilos Responsivos */
+
+/* Tablets e Celulares (até 1023px) */
+@media (max-width: 1023px) {
+  .header {
+    padding: 15px;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .menu-icon {
+    display: block; /* Mostra o ícone do menu */
+  }
+
+  .nav {
+    display: none; /* Esconde a navegação padrão */
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Ajuste conforme a altura do header */
+    right: 20px;
+    background: linear-gradient(90deg, #020c1b, #03224c);
+    border: 2px solid #00e5ff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    width: auto; /* Largura automática (não muito grande) */
+    min-width: 150px; /* Largura mínima */
+  }
+
+  .nav.active {
+    display: flex; /* Mostra a navegação quando o menu está ativo */
+  }
+
+  .nav-item {
+    margin: 5px 0; /* Reduz o espaçamento entre os itens */
+  }
+
+  .nav-link {
+    padding: 8px 16px; /* Reduz o padding dos links */
+    font-size: 16px; /* Reduz o tamanho da fonte */
+  }
+
+  #animated-title {
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .main img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .custom-btn {
+    width: 250px;
+    height: 80px;
+    font-size: 16px;
+  }
+}
+
+/* Desktops (1024px em diante) */
+@media (min-width: 1024px) {
+  .header {
+    padding: 20px;
+  }
+
+  .logo {
+    width: 250px;
+  }
+
+  .main img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .custom-btn {
+    width: 300px;
+    height: 100px;
+    font-size: 18px;
+  }
+}

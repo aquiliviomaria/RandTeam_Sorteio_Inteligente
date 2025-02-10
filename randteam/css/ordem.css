@@ -1,0 +1,140 @@
+/* Adicionar ao CSS existente */
+.ordem-sorteada {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.titulo-ordem {
+  color: #00e5ff;
+  margin: 15px 0;
+}
+
+.lista-ordenada {
+  padding-left: 20px;
+}
+
+.lista-ordenada li {
+  margin: 10px 0;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.lista-ordenada li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(10px);
+}
+/* Estilos para o novo layout */
+.input-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+}
+
+#entrada {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #00e5ff;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.listas-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.lista-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #00e5ff33;
+}
+
+.lista-box h3 {
+  color: #00e5ff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.lista-itens {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.sorteio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-sortear {
+  background: linear-gradient(45deg, #00e5ff, #0066ff) !important;
+  font-size: 18px !important;
+  padding: 15px 30px !important;
+}
+
+.btn-limpar {
+  background: linear-gradient(45deg, #ff0055, #cc0000) !important;
+}
+
+/* Estilos da lista de itens */
+.item-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 8px 0;
+  background: rgba(0, 229, 255, 0.1);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.item-lista:hover {
+  background: rgba(0, 229, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.btn-remover {
+  background: #ff0055 !important;
+  padding: 2px 10px !important;
+  border-radius: 50% !important;
+  font-weight: bold;
+}
+
+/* Barra de rolagem personalizada */
+.lista-itens::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-itens::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.lista-itens::-webkit-scrollbar-thumb {
+  background: #00e5ff;
+  border-radius: 4px;
+}

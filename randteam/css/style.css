@@ -92,16 +92,17 @@ body {
   color: white;
   font-size: 16px; /* Tamanho de fonte menor */
   font-weight: bold;
-  padding: 8px 16px; /* Padding menor */
+  padding: 10px 16px; /* Ajuste no padding para controlar a altura */
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid transparent;
   transition: all 0.3s ease;
   cursor: pointer;
-  display: list-item; /* Faz o botão ocupar toda a largura do container */
-  width: auto; /* Largura automática */
-
-  margin-top: 10px; /* Espaço entre a imagem e o botão */
+  display: block; /* Faz o botão ocupar toda a largura do container */
+  width: 100%; /* Largura total */
+  margin-top: 20px; /* Espaço acima do botão */
+  text-align: center; /* Centraliza o texto */
+  box-sizing: border-box; /* Garante que o padding não aumente a largura */
 }
 
 .custom-btn:hover {

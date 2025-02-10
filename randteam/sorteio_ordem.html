@@ -1,20 +1,53 @@
-<!-- sorteio_ordem.html -->
 <!DOCTYPE html>
 <html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorteio de Ordem</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="css/grupo.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
+    <header class="header">
+      <a href="../index.html">
+        <img src="images/logo.png" alt="Logo" class="logo" />
+      </a>
+      <h1 id="animated-title">RandTeam - Sorteio de Ordem</h1>
+    </header>
+
     <div class="container">
-      <h1>Sorteio de Ordem</h1>
-      <textarea id="nomes" rows="5" placeholder="Insira os nomes..."></textarea>
-      <button onclick="sortearOrdem()">Sortear</button>
+      <!-- Campo Único de Entrada -->
+      <div class="input-container">
+        <textarea
+          id="entrada"
+          placeholder="Insira os nomes (um por linha)"
+          rows="7"
+        ></textarea>
+        <div class="button-group">
+          <button onclick="limparTodos()" class="custom-btn btn-limpar">
+            Limpar Tudo
+          </button>
+        </div>
+      </div>
+
+      <!-- Botão de Sorteio -->
+      <div class="sorteio-container">
+        <button onclick="sortearOrdem()" class="custom-btn btn-sortear">
+          Sortear Ordem
+        </button>
+        <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
+          Baixar PDF
+        </button>
+      </div>
+
+      <!-- Resultado -->
       <div id="resultado"></div>
-      <button onclick="window.location.href='index.html'">Voltar</button>
     </div>
+
+    <nav class="nav">
+      <a href="../index.html" class="custom-btn">Voltar</a>
+    </nav>
+
+    <script src="js/ordem.js"></script>
   </body>
 </html>

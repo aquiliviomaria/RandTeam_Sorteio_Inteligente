@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteio de Temas</title>
+    <link rel="stylesheet" href="css/temas.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="../index.html">
+        <img src="images/logo.png" alt="Logo" class="logo" />
+      </a>
+      <h1 id="animated-title">RandTeam - Sorteio de Temas</h1>
+    </header>
+
+    <div class="container">
+      <!-- Campo para o nome do grupo -->
+      <div class="textarea-group">
+        <input
+          type="text"
+          id="nomeGrupo"
+          placeholder="Nome do Grupo"
+          class="custom-input"
+        />
+        <button onclick="limparNomeGrupo()" class="custom-btn danger">
+          Limpar Nome
+        </button>
+      </div>
+
+      <!-- Área para adicionar grupos e temas lado a lado -->
+      <div class="form-row">
+        <!-- Campo para adicionar grupos -->
+        <div class="form-column">
+          <div class="textarea-group">
+            <textarea
+              id="membros"
+              placeholder="Insira os membros do grupo um por linha (opcional)..."
+            ></textarea>
+            <button onclick="adicionarGrupo()" class="custom-btn">
+              Adicionar Grupo
+            </button>
+            <button onclick="limparGrupos()" class="custom-btn danger">
+              Limpar Grupos
+            </button>
+          </div>
+
+          <!-- Lista de grupos adicionados -->
+          <div id="listaGrupos">
+            <h3>Grupos Adicionados:</h3>
+            <ul id="gruposLista"></ul>
+          </div>
+        </div>
+
+        <!-- Campo para adicionar temas -->
+        <div class="form-column">
+          <div class="textarea-group">
+            <textarea
+              id="temas"
+              placeholder="Insira os temas (um por linha)..."
+            ></textarea>
+            <button onclick="limparTemas()" class="custom-btn danger">
+              Limpar Temas
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botão para sortear -->
+      <div id="left">
+        <button onclick="sortearTemas()" class="custom-btn" id="btnSortear">
+          Sortear Temas
+        </button>
+        <span id="contador" style="margin-left: 10px; display: none"></span>
+      </div>
+
+      <!-- Resultado do sorteio -->
+      <div id="resultado"></div>
+
+      <!-- Botão para baixar PDF -->
+      <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
+        Baixar PDF
+      </button>
+    </div>
+
+    <nav class="nav">
+      <a href="../index.html" class="custom-btn">Voltar</a>
+    </nav>
+
+    <script src="js/temas.js"></script>
+  </body>
+</html>

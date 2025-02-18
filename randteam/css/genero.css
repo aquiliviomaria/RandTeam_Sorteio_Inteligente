@@ -1,0 +1,304 @@
+/* Estilos gerais */
+body {
+  background: linear-gradient(-45deg, #030411, #050f40, #072172);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilo do Título (H1) */
+#animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  animation: colorChange 3s infinite;
+  text-align: center; /* Centraliza o texto */
+  flex-grow: 1; /* Ocupa o espaço restante no header */
+}
+
+/* Animação para mudar a cor do H1 */
+@keyframes colorChange {
+  0% {
+    color: #00e5ff;
+  }
+  50% {
+    color: #ff0055;
+  }
+  100% {
+    color: #00ff88;
+  }
+}
+
+/* Navbar */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  width: 150px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* Container principal */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 90%;
+  max-width: 800px;
+  margin: 100px auto 30px;
+}
+
+/* Áreas de texto e botões */
+.textarea-group {
+  margin: 15px 0;
+  display: flex;
+  gap: 10px;
+  flex-direction: column; /* Empilha os elementos verticalmente em telas pequenas */
+}
+
+.textarea-group-dual {
+  display: flex;
+  gap: 20px; /* Espaço entre os campos de texto */
+  flex-wrap: wrap; /* Permite que os campos se ajustem em telas menores */
+}
+
+.textarea-group-dual .textarea-group {
+  flex: 1; /* Faz com que os campos ocupem o espaço disponível */
+  min-width: 250px; /* Largura mínima para cada campo */
+}
+
+textarea {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  min-height: 100px;
+  width: 100%; /* Ocupa a largura total */
+}
+
+#left {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#contador {
+  color: #00e5ff;
+  font-size: 0.9em;
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+}
+
+/* Botões personalizados */
+.custom-btn {
+  padding: 8px 16px; /* Reduzido o padding */
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.custom-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Botões de "Apagar" com hover vermelho */
+.custom-btn[onclick*="limpar"]:hover {
+  background: #ff0000; /* Vermelho ao passar o mouse */
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Resultados */
+#resultado {
+  margin-top: 30px;
+}
+
+.grupo {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.grupo:hover {
+  transform: translateY(-3px);
+}
+
+.grupo h3 {
+  color: #00e5ff;
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+/* Estilo específico para o botão de download */
+#btnDownload {
+  background: #28a745;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#btnDownload:hover {
+  background: #218838;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+/* Rodapé com botão "Voltar" sempre visível no canto inferior esquerdo */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  display: flex;
+  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  gap: 20px;
+  z-index: 1000;
+}
+
+.nav {
+  margin-left: 15px; /* Espaçamento da borda esquerda */
+}
+
+.nav .custom-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #124072;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Feedback e utilitários */
+.feedback {
+  position: fixed;
+  right: -100%;
+  top: 20px;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 5px;
+  transition: right 0.5s ease;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feedback.erro {
+  background-color: #dc3545;
+  border-left: 5px solid #a71d2a;
+}
+
+.feedback.sucesso {
+  background-color: #28a745;
+  border-left: 5px solid #1e7e34;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    padding: 10px;
+  }
+
+  .logo {
+    margin-bottom: 10px; /* Espaço entre o logo e o título */
+  }
+
+  .nav {
+    flex-direction: column; /* Empilha os links de navegação */
+    gap: 10px;
+    align-items: center; /* Centraliza os links */
+  }
+
+  #animated-title {
+    font-size: 20px; /* Reduz o tamanho do título em telas menores */
+  }
+
+  .container {
+    padding: 20px; /* Reduz o padding em telas menores */
+    margin: 80px auto 20px; /* Ajusta a margem para o header fixo */
+  }
+
+  .textarea-group {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+  }
+
+  .custom-btn {
+    width: 100%; /* Botões ocupam a largura total */
+  }
+}
+
+@media (max-width: 480px) {
+  #animated-title {
+    font-size: 18px; /* Título menor para telas muito pequenas */
+  }
+
+  .container {
+    width: 95%; /* Aumenta a largura do container em telas pequenas */
+  }
+
+  .grupo {
+    padding: 15px; /* Reduz o padding dos grupos */
+  }
+
+  .grupo h3 {
+    font-size: 1em; /* Reduz o tamanho do título do grupo */
+  }
+}

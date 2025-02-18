@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorteio de Ordem</title>
-    <link rel="stylesheet" href="css/grupo.css" />
+    <link rel="stylesheet" href="css/ordem.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
@@ -14,21 +14,25 @@
       </a>
       <h1 id="animated-title">RandTeam - Sorteio de Ordem</h1>
     </header>
+<!-- Adicione isso no container, antes do input-container -->
+<div class="theme-container">
+  <input type="text" id="tema" placeholder="Digite o tema do sorteio" class="theme-input">
+</div>
 
-    <div class="container">
-      <!-- Campo Único de Entrada -->
-      <div class="input-container">
-        <textarea
-          id="entrada"
-          placeholder="Insira os nomes (um por linha)"
-          rows="7"
-        ></textarea>
-        <div class="button-group">
-          <button onclick="limparTodos()" class="custom-btn btn-limpar">
-            Limpar Tudo
-          </button>
-        </div>
-      </div>
+<!-- Modifique o input-container para: -->
+<div class="input-container">
+  <textarea
+    id="entrada"
+    placeholder="Insira os nomes dos participantes (um por linha)"
+    rows="7"
+  ></textarea>
+  <div class="button-group">
+    <button onclick="limparTodos()" class="custom-btn btn-limpar">
+      Limpar Tudo
+    </button>
+  </div>
+</div>
+
 
       <!-- Botão de Sorteio -->
       <div class="sorteio-container">
@@ -39,15 +43,22 @@
           Baixar PDF
         </button>
       </div>
+      <!-- Adicione isso no sorteio-container antes do botão de PDF -->
+      <div class="reveal-container">
+        <div id="contador"></div>
+        <div id="currentName" class="current-name"></div>
+      </div>
 
       <!-- Resultado -->
       <div id="resultado"></div>
     </div>
 
-    <nav class="nav">
-      <a href="../index.html" class="custom-btn">Voltar</a>
-    </nav>
-
+ 
+    <footer class="footer">
+      <nav class="nav">
+        <a href="../index.html" class="custom-btn">Voltar</a>
+      </nav>
+    </footer>
     <script src="js/ordem.js"></script>
   </body>
 </html>

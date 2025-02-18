@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteio por Gênero</title>
+    <link rel="stylesheet" href="css/genero.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="../index.html">
+        <img src="images/logo.png" alt="Logo" class="logo" />
+      </a>
+      <h1 id="animated-title">RandTeam - Sorteio por Gênero</h1>
+    </header>
+
+    <div class="container">
+      <!-- Campo para temas -->
+      <div class="textarea-group">
+        <textarea id="temas" placeholder="Insira o tema..."></textarea>
+        <button onclick="limparTemas()" class="custom-btn">Apagar Temas</button>
+      </div>
+
+      <!-- Campos para nomes masculinos e femininos -->
+      <div class="textarea-group-dual">
+        <div class="textarea-group">
+          <textarea
+            id="nomes-masculinos"
+            placeholder="Insira os nomes masculinos..."
+          ></textarea>
+          <button onclick="limparNomesMasculinos()" class="custom-btn">
+            Apagar Nomes
+          </button>
+        </div>
+        <div class="textarea-group">
+          <textarea
+            id="nomes-femininos"
+            placeholder="Insira os nomes femininos..."
+          ></textarea>
+          <button onclick="limparNomesFemininos()" class="custom-btn">
+            Apagar Nomes
+          </button>
+        </div>
+      </div>
+
+      <!-- Campos para número de grupos e prioridade de gênero -->
+      <div class="input-group">
+        <label for="prioridade-genero">Priorizar Gênero:</label>
+        <select id="prioridade-genero">
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="numero-grupos">Número de Grupos:</label>
+        <input
+          type="number"
+          id="numero-grupos"
+          min="1"
+          placeholder="Número de grupos"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="elementos-por-grupo">Elementos por Grupo:</label>
+        <input
+          type="number"
+          id="elementos-por-grupo"
+          min="1"
+          placeholder="Elementos por grupo"
+        />
+      </div>
+
+      <!-- Botão de sorteio -->
+      <div id="left">
+        <button onclick="sortearPorGenero()" class="custom-btn" id="btnSortear">
+          Sortear
+        </button>
+        <span id="contador" style="margin-left: 10px; display: none"></span>
+      </div>
+
+      <!-- Resultado do sorteio -->
+      <div id="resultado"></div>
+      <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
+        Baixar PDF
+      </button>
+    </div>
+
+    <!-- Rodapé com botão Voltar sempre visível no canto inferior esquerdo -->
+    <footer class="footer">
+      <nav class="nav">
+        <a href="../index.html" class="custom-btn">Voltar</a>
+      </nav>
+    </footer>
+
+    <script src="js/genero.js"></script>
+  </body>
+</html>

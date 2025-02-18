@@ -1,140 +1,301 @@
-/* Adicionar ao CSS existente */
-.ordem-sorteada {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.titulo-ordem {
-  color: #00e5ff;
-  margin: 15px 0;
-}
-
-.lista-ordenada {
-  padding-left: 20px;
-}
-
-.lista-ordenada li {
-  margin: 10px 0;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.lista-ordenada li:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(10px);
-}
-/* Estilos para o novo layout */
-.input-container {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
-}
-
-#entrada {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 2px solid #00e5ff;
-  border-radius: 8px;
+/* Estilos gerais */
+body {
+  background: linear-gradient(-45deg, #030411, #050f40, #072172);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
   color: white;
-  font-size: 16px;
-  resize: vertical;
-  min-height: 120px;
+  margin: 0;
+  padding: 0 0 80px; /* Padding para o nav fixo no fundo */
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
-.button-group {
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Header */
+.header {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
-.listas-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  margin-bottom: 30px;
+.logo {
+  width: 150px;
+  transition: transform 0.3s ease;
 }
 
-.lista-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #00e5ff33;
+.logo:hover {
+  transform: scale(1.05);
 }
 
-.lista-box h3 {
-  color: #00e5ff;
-  margin-bottom: 15px;
+#animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  animation: colorChange 3s infinite;
   text-align: center;
+  flex-grow: 1;
+  margin: 0 20px;
 }
 
-.lista-itens {
-  max-height: 200px;
-  overflow-y: auto;
-  padding: 10px;
+@keyframes colorChange {
+  0% {
+    color: #00e5ff;
+  }
+  50% {
+    color: #ff0055;
+  }
+  100% {
+    color: #00ff88;
+  }
+}
+
+/* Containers principais */
+.theme-container,
+.input-container,
+.reveal-container,
+.sorteio-container,
+#resultado {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.theme-container {
+  margin-top: 100px; /* Espaço para o header fixo */
+}
+
+/* Elementos do formulário */
+#tema {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 16px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Grupos de botões */
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
 .sorteio-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 30px;
 }
 
-.btn-sortear {
-  background: linear-gradient(45deg, #00e5ff, #0066ff) !important;
-  font-size: 18px !important;
-  padding: 15px 30px !important;
-}
-
-.btn-limpar {
-  background: linear-gradient(45deg, #ff0055, #cc0000) !important;
-}
-
-/* Estilos da lista de itens */
-.item-lista {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 8px 0;
-  background: rgba(0, 229, 255, 0.1);
+/* Botões personalizados */
+.custom-btn {
+  padding: 12px 25px;
+  border: none;
   border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.item-lista:hover {
-  background: rgba(0, 229, 255, 0.2);
-  transform: translateX(5px);
+.custom-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
 }
 
-.btn-remover {
-  background: #ff0055 !important;
-  padding: 2px 10px !important;
-  border-radius: 50% !important;
-  font-weight: bold;
+.btn-limpar {
+  background: #dc3545 !important;
 }
 
-/* Barra de rolagem personalizada */
-.lista-itens::-webkit-scrollbar {
-  width: 8px;
+.btn-sortear {
+  background: #007bff !important;
 }
 
-.lista-itens::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+#btnDownload {
+  background: #28a745 !important;
+  order: 1; /* Coloca o botão PDF depois do de sortear */
 }
 
-.lista-itens::-webkit-scrollbar-thumb {
-  background: #00e5ff;
-  border-radius: 4px;
+/* Elementos do sorteio */
+.reveal-container {
+  text-align: center;
+  padding: 30px !important;
+}
+
+#contador {
+  font-size: 3em; /* Reduzido de 5em para 3em */
+  color: #00ff88;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  margin: 20px 0;
+}
+
+#currentName {
+  font-size: 14pt; /* Reduzido de 2em para 1.5em */
+  color: #00e5ff;
+  min-height: 60px;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Feedback messages */
+.feedback {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 5px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 20px;
+  }
+}
+
+.feedback.erro {
+  background-color: #dc3545;
+  border-left: 5px solid #a71d2a;
+}
+
+.feedback.sucesso {
+  background-color: #28a745;
+  border-left: 5px solid #1e7e34;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  display: flex;
+  justify-content: flex-start; /* Alinha o botão à esquerda */
+  gap: 20px;
+  z-index: 1000;
+}
+
+.nav {
+  margin-left: 15px; /* Adiciona um pequeno espaçamento da borda esquerda */
+}
+
+.nav .custom-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #124072;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  #animated-title {
+    font-size: 20px;
+  }
+
+  .theme-container,
+  .input-container,
+  .reveal-container,
+  .sorteio-container,
+  #resultado {
+    padding: 20px;
+    margin: 15px auto;
+  }
+
+  .theme-container {
+    margin-top: 80px;
+  }
+
+  #contador {
+    font-size: 2em; /* Reduzido para telas menores */
+  }
+
+  #currentName {
+    font-size: 1.2em; /* Reduzido para telas menores */
+  }
+
+  .feedback {
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  #animated-title {
+    font-size: 18px;
+  }
+
+  .custom-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  #contador {
+    font-size: 1.5em; /* Tamanho menor para telas muito pequenas */
+  }
+
+  #currentName {
+    font-size: 1em; /* Tamanho menor para telas muito pequenas */
+  }
 }

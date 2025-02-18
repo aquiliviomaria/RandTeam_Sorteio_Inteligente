@@ -273,32 +273,30 @@ function mostrarSucesso(mensagem, persistente = false) {
 
 function gerarPDF() {
   try {
-    // Obtém os grupos sorteados
-    const gruposSorteados = grupos.map((grupo, index) => {
-      const tema = temas[index] || "Tema não definido"; // Associa o tema ao grupo
-      return {
-        nome: `Grupo ${index + 1}: ${grupo.nome}`,
-        tema: tema,
-        membros: grupo.membros,
-      };
-    });
+    console.log("[DEBUG] Iniciando geração de PDF");
 
-    if (gruposSorteados.length === 0) {
+    // Verificação robusta do estado dos grupos
+    if (!grupos || grupos.length === 0) {
+      console.error("[ERRO] Nenhum grupo foi sorteado ainda!");
       mostrarErro("Nenhum grupo foi sorteado ainda!");
       return;
     }
 
-    if (typeof jspdf === "undefined") {
-      mostrarErro("Biblioteca PDF não carregada!");
+    // Verificação aprimorada da biblioteca
+    if (typeof jspdf === "undefined" || !window.jspdf) {
+      console.error("[ERRO] Biblioteca jsPDF não carregada");
+      mostrarErro("Biblioteca PDF não está disponível!");
       return;
     }
 
-    const doc = new jspdf.jsPDF({
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
       orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
 
+    // Configuração de cores
     const colors = {
       primary: "#2C3E50",
       secondary: "#27AE60",
@@ -314,45 +312,53 @@ function gerarPDF() {
     let y = margin;
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Fundo azulado
-    doc.setFillColor(colors.background);
-    doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
+    // Função para carregar a logo
+    const loadLogo = () => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
 
-    // Logo centralizado
-    const logoUrl = "./images/logo.png";
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
+        img.onload = () => {
+          try {
+            const logoWidth = 40;
+            const logoX = (pageWidth - logoWidth) / 2;
+            doc.addImage(img, "PNG", logoX, y, logoWidth, 15);
+            y += 25;
+            resolve(true);
+          } catch (error) {
+            console.error("[ERRO] Erro ao adicionar a logo:", error);
+            resolve(false);
+          }
+        };
 
-    img.onload = () => {
+        img.onerror = () => {
+          console.warn("[AVISO] Logo não carregada, usando fallback.");
+          resolve(false);
+        };
+
+        img.src = "./images/logo.png";
+      });
+    };
+
+    // Função para gerar o conteúdo principal
+    const generateContent = () => {
       try {
-        const logoWidth = 40;
-        const logoX = (pageWidth - logoWidth) / 2;
-        doc.addImage(img, "PNG", logoX, y, logoWidth, 15);
-        y += 25;
-
         // Título do relatório
         doc.setFontSize(18);
         doc.setTextColor(colors.primary);
-        doc.setFont(undefined, "bold");
+        doc.setFont("helvetica", "bold");
         doc.text("RELATÓRIO DE GRUPOS", pageWidth / 2, y, { align: "center" });
         y += 10;
 
-        // Cabeçalho da tabela
+        // Tabela de grupos
         const headers = ["Grupo", "Tema", "Membros"];
-        const rows = gruposSorteados.map((grupo) => [
-          grupo.nome,
-          grupo.tema,
-          grupo.membros.join("\n"),
-        ]);
-
         const colWidths = [25, 55, 110];
         const rowHeight = 10;
         const headerHeight = 8;
 
-        // Estilo do cabeçalho
+        // Cabeçalho da tabela
         doc.setFillColor(colors.header);
         doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
-
         doc.setFontSize(10);
         doc.setTextColor("#FFFFFF");
         let x = margin;
@@ -364,15 +370,21 @@ function gerarPDF() {
 
         // Conteúdo da tabela
         doc.setFontSize(9);
-        rows.forEach((row, rowIndex) => {
-          x = margin;
-          let maxLines = 1;
+        grupos.forEach((grupo, rowIndex) => {
+          const rowData = [
+            `Grupo ${rowIndex + 1}: ${grupo.nome}`,
+            grupo.tema || "Tema não definido",
+            grupo.membros?.join("\n") || "Sem membros",
+          ];
 
-          row.forEach((cell, colIndex) => {
+          // Calcula a altura máxima da linha
+          let maxLines = 1;
+          rowData.forEach((cell, colIndex) => {
             const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
             maxLines = Math.max(maxLines, lines.length);
           });
 
+          // Fundo alternado para linhas
           doc.setFillColor(rowIndex % 2 === 0 ? "#FFFFFF" : "#F8F9FA");
           doc.rect(
             margin,
@@ -382,10 +394,12 @@ function gerarPDF() {
             "F"
           );
 
-          row.forEach((cell, colIndex) => {
-            doc.setTextColor(colors.text);
+          // Adiciona o conteúdo das células
+          x = margin;
+          rowData.forEach((cell, colIndex) => {
             const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
             lines.forEach((line, lineIndex) => {
+              doc.setTextColor(colors.text);
               doc.text(line, x + 2, y + 5 + lineIndex * 5);
             });
             x += colWidths[colIndex];
@@ -393,7 +407,7 @@ function gerarPDF() {
 
           y += rowHeight * maxLines + 2;
 
-          // Nova página se necessário
+          // Quebra de página se necessário
           if (y > 260) {
             doc.addPage();
             y = margin;
@@ -409,36 +423,35 @@ function gerarPDF() {
         doc.text("ESTATÍSTICAS DO SORTEIO", margin, y);
         y += 8;
 
-        const totalGrupos = gruposSorteados.length;
-        const totalMembros = gruposSorteados.reduce(
-          (acc, grupo) => acc + grupo.membros.length,
+        const totalGrupos = grupos.length;
+        const totalMembros = grupos.reduce(
+          (acc, grupo) => acc + (grupo.membros ? grupo.membros.length : 0),
           0
         );
-        const temasUnicos = new Set(gruposSorteados.map((g) => g.tema)).size;
+        const temasUnicos = new Set(grupos.map((g) => g.tema)).size;
 
-        const statsHeaders = ["Itens", "Valores"];
         const statsData = [
           ["Total de Grupos", totalGrupos],
           ["Total de Membros", totalMembros],
           ["Temas Únicos", temasUnicos],
         ];
 
+        // Estilo do cabeçalho das estatísticas
         doc.setFillColor(colors.statsHeader);
         doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
         doc.setFontSize(10);
         doc.setTextColor("#FFFFFF");
-        doc.text(statsHeaders[0], margin + 2, y + 6);
-        doc.text(statsHeaders[1], pageWidth - margin - 20, y + 6, {
-          align: "right",
-        });
+        doc.text("Itens", margin + 2, y + 6);
+        doc.text("Valores", pageWidth - margin - 20, y + 6, { align: "right" });
         y += 10;
 
-        statsData.forEach((row, index) => {
+        // Conteúdo das estatísticas
+        statsData.forEach(([label, value], index) => {
           doc.setFillColor(index % 2 === 0 ? "#E8F5E9" : "#C8E6C9");
           doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
           doc.setTextColor(colors.text);
-          doc.text(row[0], margin + 2, y + 6);
-          doc.text(row[1].toString(), pageWidth - margin - 2, y + 6, {
+          doc.text(label, margin + 2, y + 6);
+          doc.text(value.toString(), pageWidth - margin - 2, y + 6, {
             align: "right",
           });
           y += 10;
@@ -446,7 +459,7 @@ function gerarPDF() {
 
         // Rodapé
         const footerY = doc.internal.pageSize.height - 15;
-        const dataEmissao = new Date().toLocaleDateString("pt-BR", {
+        const dataEmissao = new Date().toLocaleString("pt-BR", {
           day: "2-digit",
           month: "2-digit",
           year: "numeric",
@@ -476,23 +489,31 @@ function gerarPDF() {
 
         // Salva o PDF
         doc.save(`relatorio-sorteio-${Date.now()}.pdf`);
+        console.log("[DEBUG] PDF gerado com sucesso");
       } catch (error) {
-        console.error(error);
-        mostrarErro("Erro na geração do PDF!");
+        console.error("[ERRO] Durante a geração do conteúdo:", error);
+        mostrarErro("Falha na criação do conteúdo!");
       }
     };
 
-    img.onerror = () => {
-      doc.setFontSize(16);
-      doc.setTextColor(colors.primary);
-      doc.text("RandTeam", pageWidth / 2, y, { align: "center" });
-      y += 20;
-      img.onload();
-    };
-
-    img.src = logoUrl;
+    // Carregamento da logo e geração do conteúdo
+    loadLogo()
+      .then((logoLoaded) => {
+        if (!logoLoaded) {
+          // Fallback para texto se a logo não carregar
+          doc.setFontSize(16);
+          doc.setTextColor(colors.primary);
+          doc.text("RandTeam", pageWidth / 2, y, { align: "center" });
+          y += 20;
+        }
+        generateContent();
+      })
+      .catch((error) => {
+        console.error("[ERRO] No carregamento da logo:", error);
+        generateContent(); // Continua sem a logo
+      });
   } catch (error) {
-    console.error(error);
-    mostrarErro("Falha crítica ao gerar PDF!");
+    console.error("[ERRO CRÍTICO]", error);
+    mostrarErro("Falha grave na geração do PDF!");
   }
 }

@@ -29,13 +29,13 @@
         <nav>
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Início</a>
+              <a class="nav-link" href="index.html" data-section="inicio">Início</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="sobre.html">Sobre</a>
+              <a class="nav-link" href="#sobre" data-section="sobre">Sobre</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contato.html">Contato</a>
+              <a class="nav-link" href="#contato" data-section="contato">Contato</a>
             </li>
           </ul>
         </nav>
@@ -44,33 +44,64 @@
         <p>Escolha um modo de sorteio:</p>
         <div class="d-flex justify-content-center">
          <div class="main">
-  <div class="item">
-    <a href="sobre.html">
-      <img src="randteam/images/grupo.png" alt="Sorteio de Grupos" />
-    </a>
+  <div class="item" onclick="showSection('sobre')">
+   
+      <img src="randteam/images/grupo.png" alt="Sorteio por Grupos" />
     <button class="custom-btn" onclick="window.location.href='randteam/sorteio_grupo.html'">
-      Sorteio de Grupos
+      Sorteio por Grupos
     </button>
   </div>
-  <div class="item">
-    <a href="sobre.html">
-      <img src="randteam/images/nomes.png" alt="Sorteio de Nomes" />
-    </a>
+  <div class="item" onclick="showSection('sobre')">
+   
+      <img src="randteam/images/genero.png" alt="Sorteio por Genero" />
+
+    <button class="custom-btn" onclick="window.location.href='randteam/sorteio_genero.html'">
+      Sorteio por Genero
+    </button>
+  </div>
+  <div class="item" onclick="showSection('sobre')">
+    
+      <img src="randteam/images/nomes.png" alt="Sorteio por Nomes" />
+   
     <button class="custom-btn" onclick="window.location.href='randteam/sorteio_temas.html'">
-      Sorteio de Temas
+      Sorteio por Temas
     </button>
   </div>
-  <div class="item">
-    <a href="sobre.html">
-      <img src="randteam/images/ordem.png" alt="Sorteio de Ordem" />
-    </a>
+  <div class="item" onclick="showSection('sobre')">
+    
+      <img src="randteam/images/ordem.png" alt="Sorteio por Ordem" />
+   
     <button class="custom-btn" onclick="window.location.href='randteam/sorteio_ordem.html'">
-      Sorteio de Ordem
+      Sorteio por Ordem
     </button>
   </div>
+ 
 </div>
 
       </section>
+
+    <!-- Seção Sobre -->
+    <div id="sobre-content" class="content-section right-panel">
+      <section class="container mt-5">
+        <!-- Conteúdo do Sobre -->
+        <span class="close-btn" onclick="hideSections()">&times;</span>
+      </section>
+    </div>
+ 
+      <!-- Seção Contato -->
+      <div id="contato-content" class="content-section right-panel">
+        <section class="container mt-5">
+          <!-- Formulário de Contato -->
+          <span class="close-btn" onclick="hideSections()">&times;</span>
+          <div class="personal-info">
+            <h3>Informações Pessoais</h3>
+            <p>Email: exemplo@randteam.com</p>
+            <p>Telefone: (XX) XXXX-XXXX</p>
+          </div>
+        </section>
+      </div>
+
+
 
       <footer class="footer">
         
@@ -115,6 +146,37 @@ document.querySelector('.menu-icon').addEventListener('click', function () {
   const nav = document.querySelector('.nav');
   nav.classList.toggle('active'); // Adiciona ou remove a classe 'active'
 });
+
+
+ // Funções atualizadas
+ function showSection(section) {
+        document.querySelectorAll('.content-section').forEach(div => {
+          div.style.display = 'none';
+          div.classList.remove('active');
+        });
+        
+        const sectionElement = document.getElementById(`${section}-content`);
+        if(sectionElement) {
+          sectionElement.style.display = 'block';
+          sectionElement.classList.add('active');
+        }
+      }
+
+      function hideSections() {
+        document.querySelectorAll('.content-section').forEach(div => {
+          div.style.display = 'none';
+          div.classList.remove('active');
+        });
+        document.getElementById('inicio-content').style.display = 'block';
+      }
+
+      // Event Listeners
+      document.querySelectorAll('[data-section]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(this.dataset.section);
+        });
+      });
     </script>
   </body>
 </html>

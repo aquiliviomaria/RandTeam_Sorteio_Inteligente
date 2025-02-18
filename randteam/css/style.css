@@ -3,7 +3,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background: black;
+  background: rgb(2, 1, 15);
   color: white;
   display: flex;
   flex-direction: column;
@@ -51,32 +51,41 @@ body {
 /* Container principal */
 .main {
   display: flex;
-  justify-content: flex-start; /* Alinha os itens no início */
-  align-items: flex-start; /* Alinha os itens no topo */
-  gap: 20px; /* Espaço entre os itens */
-  flex-wrap: nowrap; /* Mantém os itens em uma única linha */
+  gap: 20px;
   padding: 20px;
-  overflow-x: auto; /* Permite rolagem horizontal se necessário */
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #00e5ff transparent;
+}
+.main::-webkit-scrollbar {
+  height: 8px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: #00e5ff;
+  border-radius: 4px;
 }
 
 /* Cada item (imagem + botão) */
 .item {
-  text-align: center; /* Centraliza o conteúdo */
-  border: 2px solid #333; /* Borda moderna */
-  border-radius: 15px; /* Bordas arredondadas */
+  text-align: left;
+  border: 2px solid #333;
+  border-radius: 15px;
   padding: 10px;
-  transition: transform 0.3s ease-in-out; /* Animação ao passar o mouse */
-  flex: 0 0 auto; /* Impede que os itens cresçam ou encolham */
+  transition: transform 0.3s ease-in-out;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .item:hover {
-  transform: scale(1.05); /* Efeito de aumento suave ao passar o mouse */
+  transform: scale(1.05);
 }
 
 /* Estilo das imagens */
 .main img {
-  width: 200px; /* Tamanho menor para as imagens */
-  height: 200px;
+  width: 120px; /* Tamanho menor para as imagens */
+  height: 150px;
   border-radius: 10px; /* Bordas arredondadas nas imagens */
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -88,21 +97,20 @@ body {
 
 /* Estilo dos botões */
 .custom-btn {
-  text-decoration: none;
   color: white;
-  font-size: 16px; /* Tamanho de fonte menor */
-  font-weight: bold;
-  padding: 10px 16px; /* Ajuste no padding para controlar a altura */
+  font-size: 14px; /* Tamanho de fonte menor */
+
+  padding: 8px 12px; /* Ajuste no padding para controlar a altura */
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid transparent;
   transition: all 0.3s ease;
   cursor: pointer;
-  display: block; /* Faz o botão ocupar toda a largura do container */
-  width: 100%; /* Largura total */
-  margin-top: 20px; /* Espaço acima do botão */
+  width: 150px; /* Largura total */
+  margin: 15px 0 0 0; /* Espaço acima do botão */
   text-align: center; /* Centraliza o texto */
-  box-sizing: border-box; /* Garante que o padding não aumente a largura */
+  align-self: flex-start;
+  height: 5px;
 }
 
 .custom-btn:hover {
@@ -337,22 +345,22 @@ h1 {
   }
 
   .main {
-    flex-direction: column;
-    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    overflow-x: auto; /* Scroll horizontal */
   }
 
   .main img {
-    width: 100%;
-    height: auto;
-    max-width: 200px;
+    width: 100px;
+    height: 100px;
   }
 
   .custom-btn {
     width: 100%;
     max-width: 200px;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+    height: 30px; /* Altura reduzida */
+    padding: 5px 10px; /* Ajuste do padding */
+    font-size: 12px; /* Fonte menor para mobile */
   }
 
   .footer {
@@ -446,6 +454,51 @@ h1 {
   cursor: pointer;
 }
 
+/* Estilos para a .main com scroll horizontal */
+.main {
+  padding: 20px;
+  display: flex;
+  overflow-x: auto; /* Scroll horizontal */
+  gap: 20px;
+  scrollbar-width: thin; /* Para navegadores modernos */
+  scrollbar-color: #00e5ff #020c1b; /* Cor do scroll */
+}
+
+/* Personaliza a barra de scroll */
+.main::-webkit-scrollbar {
+  height: 8px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: #020c1b;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: #00e5ff;
+  border-radius: 10px;
+}
+
+/* Estilos para os botões */
+.custom-btn {
+  width: 100%;
+  max-width: 200px;
+  height: 40px; /* Altura reduzida */
+  padding: 8px 15px; /* Ajuste do padding */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #00e5ff, #00ff88);
+  color: #020c1b;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
 /* Estilos Responsivos */
 
 /* Tablets e Celulares (até 1023px) */
@@ -497,14 +550,14 @@ h1 {
   }
 
   .main img {
-    width: 250px;
-    height: 250px;
+    width: 100px;
+    height: 100px;
   }
 
   .custom-btn {
-    width: 250px;
-    height: 80px;
-    font-size: 16px;
+    height: 35px; /* Altura reduzida para tablets */
+    padding: 6px 12px;
+    font-size: 14px;
   }
 }
 
@@ -524,8 +577,181 @@ h1 {
   }
 
   .custom-btn {
-    width: 300px;
-    height: 100px;
-    font-size: 18px;
+    height: 45px; /* Altura ligeiramente maior para desktop */
+    padding: 10px 20px;
+    font-size: 16px;
   }
+}
+
+/* Estilo para o item de navegação ativo */
+.nav-item.active {
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Estilo para as seções de conteúdo */
+.content-section {
+  background: rgba(2, 12, 27, 0.8);
+  border: 2px solid #00e5ff;
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 800px;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilo para o conteúdo da seção Sobre */
+#sobre-content {
+  background: rgba(2, 12, 27, 0.9);
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* Estilo para o conteúdo da seção Contato */
+#contato-content {
+  background: rgba(2, 12, 27, 0.9);
+  border: 2px solid #ff0055;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+}
+
+/* Estilo para o formulário de contato */
+#contato-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contato-content input,
+#contato-content textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #00e5ff;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+#contato-content input:focus,
+#contato-content textarea:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00ff88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  outline: none;
+}
+
+#contato-content button {
+  background: linear-gradient(90deg, #00e5ff, #00ff88);
+  color: #020c1b;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#contato-content button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+/* Estilo para o conteúdo da seção Início */
+#inicio-content {
+  background: rgba(2, 12, 27, 0.9);
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+/* Responsividade para as seções de conteúdo */
+@media (max-width: 767px) {
+  .content-section {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  #contato-content input,
+  #contato-content textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  #contato-content button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+/* CSS Adicional */
+.right-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  height: 100%;
+  background: rgba(2, 12, 27, 0.95);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.right-panel.active {
+  right: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #00e5ff;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.item:hover .image-overlay {
+  display: flex;
+}
+
+.personal-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.personal-info h3 {
+  color: #00ff88;
+  border-bottom: 2px solid #00e5ff;
+  padding-bottom: 10px;
 }

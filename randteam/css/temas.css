@@ -29,11 +29,10 @@ body {
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   animation: colorChange 3s infinite;
-  text-align: center; /* Centraliza o texto */
-  flex-grow: 1; /* Ocupa o espaço restante no header */
+  text-align: center;
+  flex-grow: 1;
 }
 
-/* Animação para mudar a cor do H1 */
 @keyframes colorChange {
   0% {
     color: #00e5ff;
@@ -81,29 +80,37 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   width: 90%;
-  max-width: 1200px; /* Aumentei a largura máxima para acomodar os elementos lado a lado */
+  max-width: 1200px;
   margin: 100px auto 30px;
 }
 
-/* Área para organizar os campos lado a lado */
+/* Layout dos campos */
 .form-row {
   display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 25px;
 }
 
 .form-column {
-  flex: 1; /* Divide o espaço igualmente entre as colunas */
-}
-
-/* Áreas de texto e botões */
-.textarea-group {
-  margin: 15px 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: -10px;
+}
+
+/* Áreas de texto */
 textarea {
   flex-grow: 1;
   padding: 12px;
@@ -112,10 +119,9 @@ textarea {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   min-height: 100px;
-  width: 100%; /* Ocupa a largura total */
+  width: 100%;
 }
 
-/* Estilo para o campo de entrada do nome do grupo */
 .custom-input {
   width: 100%;
   padding: 12px;
@@ -124,17 +130,17 @@ textarea {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   box-sizing: border-box;
 }
 
-/* Estilo para a lista de grupos adicionados */
+/* Lista de grupos */
 #listaGrupos {
-  margin: 20px 0;
-  padding: 15px;
+  flex-grow: 1;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 229, 255, 0.3);
   border-radius: 10px;
+  padding: 15px;
 }
 
 #listaGrupos h3 {
@@ -148,36 +154,6 @@ textarea {
 }
 
 #gruposLista li {
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  margin-bottom: 5px;
-  border-radius: 5px;
-  color: white;
-}
-/* Estilo para as listas de membros e temas */
-#listaMembros,
-#listaTemas {
-  margin: 20px 0;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  border-radius: 10px;
-}
-
-#listaMembros h3,
-#listaTemas h3 {
-  color: #00e5ff;
-  margin-bottom: 10px;
-}
-
-#membrosLista,
-#temasLista {
-  list-style-type: none;
-  padding: 0;
-}
-
-#membrosLista li,
-#temasLista li {
   padding: 8px;
   background: rgba(255, 255, 255, 0.1);
   margin-bottom: 5px;
@@ -205,15 +181,24 @@ textarea {
   transform: scale(1.05);
 }
 
-/* Botão de perigo (vermelho) */
+/* Botões de perigo (vermelho) */
 .custom-btn.danger {
-  background: rgba(255, 0, 0, 0.2);
-  border: 1px solid rgba(255, 0, 0, 0.5);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .custom-btn.danger:hover {
-  background: rgba(255, 0, 0, 0.3);
-  border: 1px solid rgba(255, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid red;
+  box-shadow: 0 0 10px red;
+  transform: scale(1.05);
 }
 
 /* Resultados */
@@ -241,7 +226,7 @@ textarea {
   font-size: 1.2em;
 }
 
-/* Estilo específico para o botão de download */
+/* Botão Download */
 #btnDownload {
   background: #28a745;
   margin-top: 20px;
@@ -254,7 +239,6 @@ textarea {
   border: none;
   cursor: pointer;
   text-align: center;
-  box-sizing: border-box;
 }
 
 #btnDownload:hover {
@@ -262,30 +246,7 @@ textarea {
   box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
 }
 
-/* Feedback e utilitários */
-.feedback {
-  position: fixed;
-  right: -100%;
-  top: 20px;
-  padding: 15px 25px;
-  color: white;
-  border-radius: 5px;
-  transition: right 0.5s ease;
-  z-index: 1000;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.feedback.erro {
-  background-color: #dc3545;
-  border-left: 5px solid #a71d2a;
-}
-
-.feedback.sucesso {
-  background-color: #28a745;
-  border-left: 5px solid #1e7e34;
-}
-
+/* Rodapé */
 .footer {
   position: fixed;
   bottom: 0;
@@ -294,13 +255,13 @@ textarea {
   background: rgba(0, 0, 0, 0.3);
   padding: 15px;
   display: flex;
-  justify-content: flex-start; /* Alinha o botão à esquerda */
+  justify-content: flex-start;
   gap: 20px;
   z-index: 1000;
 }
 
 .nav {
-  margin-left: 15px; /* Adiciona um pequeno espaçamento da borda esquerda */
+  margin-left: 15px;
 }
 
 .nav .custom-btn {
@@ -340,10 +301,20 @@ textarea {
 
   .form-row {
     flex-direction: column;
+    gap: 25px;
   }
 
-  .custom-btn {
-    width: 100%;
+  .input-group {
+    flex-direction: column;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  #membros,
+  #temas {
+    min-height: 120px;
   }
 }
 

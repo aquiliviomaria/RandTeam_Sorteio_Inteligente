@@ -141,6 +141,9 @@ function sortearTemas() {
     tema: temasEmbaralhados[index],
   }));
 
+  // Atualiza a variável global com os temas sorteados
+  grupos = gruposSorteados;
+
   // Anuncia os grupos e inicia o contador
   anunciarGrupos(gruposSorteados, 0, () => {
     btnDownload.style.display = "block";
@@ -271,18 +274,19 @@ function mostrarSucesso(mensagem, persistente = false) {
   }
 }
 
+/**
+ * Gera um PDF com os grupos e temas sorteados.
+ */
 function gerarPDF() {
   try {
     console.log("[DEBUG] Iniciando geração de PDF");
 
-    // Verificação robusta do estado dos grupos
     if (!grupos || grupos.length === 0) {
       console.error("[ERRO] Nenhum grupo foi sorteado ainda!");
       mostrarErro("Nenhum grupo foi sorteado ainda!");
       return;
     }
 
-    // Verificação aprimorada da biblioteca
     if (typeof jspdf === "undefined" || !window.jspdf) {
       console.error("[ERRO] Biblioteca jsPDF não carregada");
       mostrarErro("Biblioteca PDF não está disponível!");
@@ -296,7 +300,6 @@ function gerarPDF() {
       format: "a4",
     });
 
-    // Configuração de cores
     const colors = {
       primary: "#2C3E50",
       secondary: "#27AE60",
@@ -312,12 +315,10 @@ function gerarPDF() {
     let y = margin;
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Função para carregar a logo
     const loadLogo = () => {
       return new Promise((resolve) => {
         const img = new Image();
         img.crossOrigin = "Anonymous";
-
         img.onload = () => {
           try {
             const logoWidth = 40;
@@ -330,17 +331,14 @@ function gerarPDF() {
             resolve(false);
           }
         };
-
         img.onerror = () => {
           console.warn("[AVISO] Logo não carregada, usando fallback.");
           resolve(false);
         };
-
-        img.src = "./images/logo.png";
+        img.src = "images/logo.png"; // Caminho corrigido
       });
     };
 
-    // Função para gerar o conteúdo principal
     const generateContent = () => {
       try {
         // Título do relatório
@@ -373,7 +371,7 @@ function gerarPDF() {
         grupos.forEach((grupo, rowIndex) => {
           const rowData = [
             `Grupo ${rowIndex + 1}: ${grupo.nome}`,
-            grupo.tema || "Tema não definido",
+            grupo.tema || "Tema não definido", // Agora grupo.tema existe
             grupo.membros?.join("\n") || "Sem membros",
           ];
 
@@ -500,7 +498,6 @@ function gerarPDF() {
     loadLogo()
       .then((logoLoaded) => {
         if (!logoLoaded) {
-          // Fallback para texto se a logo não carregar
           doc.setFontSize(16);
           doc.setTextColor(colors.primary);
           doc.text("RandTeam", pageWidth / 2, y, { align: "center" });

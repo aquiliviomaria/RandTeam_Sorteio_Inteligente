@@ -332,9 +332,9 @@ textarea {
 }
 
 .custom-btn[onclick*="limpar"]:hover {
-  background: #ff4444 !important;
-  border-color: #ff0000 !important;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4) !important;
+  background: #ff0000; /* Vermelho ao passar o mouse */
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 /* Grupos */

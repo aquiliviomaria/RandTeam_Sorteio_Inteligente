@@ -16,53 +16,43 @@
     </header>
 
     <div class="container">
-      <!-- Campo para o nome do grupo -->
-      <div class="textarea-group">
-        <input
-          type="text"
-          id="nomeGrupo"
-          placeholder="Nome do Grupo"
-          class="custom-input"
-        />
-        <button onclick="limparNomeGrupo()" class="custom-btn danger">
-          Limpar Nome
-        </button>
-      </div>
-
       <!-- Área para adicionar grupos e temas lado a lado -->
-      <div class="form-row">
-        <!-- Campo para adicionar grupos -->
-        <div class="form-column">
-          <div class="textarea-group">
-            <textarea
-              id="membros"
-              placeholder="Insira os membros do grupo um por linha (opcional)..."
-            ></textarea>
-            <button onclick="adicionarGrupo()" class="custom-btn">
-              Adicionar Grupo
-            </button>
-            <button onclick="limparGrupos()" class="custom-btn danger">
-              Limpar Grupos
-            </button>
-          </div>
+      <div class="textarea-group-dual">
+        <!-- Campo para o nome do grupo e membros -->
+        <div class="textarea-group">
+          <input
+            type="text"
+            id="nomeGrupo"
+            placeholder="Nome do Grupo"
+            class="custom-input"
+          />
+          <button onclick="limparNomeGrupo()" class="custom-btn danger">
+            Limpar Nome
+          </button>
+          <textarea
+            id="membros"
+            placeholder="Insira os membros do grupo um por linha (opcional)..."
+          ></textarea>
+          <button onclick="adicionarGrupo()" class="custom-btn">
+            Adicionar Grupo
+          </button>
+          <button onclick="limparGrupos()" class="custom-btn danger">
+            Limpar Grupos
+          </button>
+        </div>
 
-          <!-- Lista de grupos adicionados -->
+        <!-- Campo para adicionar temas e lista de grupos -->
+        <div class="textarea-group">
+          <textarea
+            id="temas"
+            placeholder="Insira os temas (um por linha)..."
+          ></textarea>
+          <button onclick="limparTemas()" class="custom-btn danger">
+            Limpar Temas
+          </button>
           <div id="listaGrupos">
             <h3>Grupos Adicionados:</h3>
             <ul id="gruposLista"></ul>
-          </div>
-        </div>
-
-        <!-- Campo para adicionar temas -->
-        <div class="form-column">
-          <div class="textarea-group">
-            <textarea
-              id="temas"
-              placeholder="Insira os temas (um por linha)..."
-            ></textarea>
-            <button onclick="limparTemas()" class="custom-btn danger">
-              Limpar Temas
-            </button>
           </div>
         </div>
       </div>

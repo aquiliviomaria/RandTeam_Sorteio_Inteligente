@@ -84,6 +84,25 @@ function limparTemas() {
 }
 
 /**
+ * Limpa o campo de nome do grupo.
+ */
+function limparNomeGrupo() {
+  const nomeGrupoInput = document.getElementById("nomeGrupo");
+
+  // Verifica se o campo já está vazio
+  if (nomeGrupoInput.value.trim() === "") {
+    mostrarErro("O campo de nome do grupo já está vazio!");
+    return;
+  }
+
+  // Limpa o campo
+  nomeGrupoInput.value = "";
+
+  // Exibe feedback de sucesso
+  mostrarSucesso("Nome do grupo apagado com sucesso.");
+}
+
+/**
  * Realiza o sorteio de temas.
  */
 function sortearTemas() {
@@ -345,7 +364,9 @@ function gerarPDF() {
         doc.setFontSize(18);
         doc.setTextColor(colors.primary);
         doc.setFont("helvetica", "bold");
-        doc.text("RELATÓRIO DE GRUPOS", pageWidth / 2, y, { align: "center" });
+        doc.text("Sorteio de Grupos por Temas", pageWidth / 2, y, {
+          align: "center",
+        });
         y += 10;
 
         // Tabela de grupos
@@ -479,7 +500,7 @@ function gerarPDF() {
           { align: "right" }
         );
         doc.text(
-          "Desenvolvido por: Aquilivio Maria",
+          "Created & Designed by Aquilivio Maria",
           pageWidth - margin - 2,
           footerY + 5,
           { align: "right" }
@@ -513,4 +534,59 @@ function gerarPDF() {
     console.error("[ERRO CRÍTICO]", error);
     mostrarErro("Falha grave na geração do PDF!");
   }
+}
+
+// Sistema de feedback aprimorado
+function mostrarErro(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback erro";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+function mostrarSucesso(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback sucesso";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
 }

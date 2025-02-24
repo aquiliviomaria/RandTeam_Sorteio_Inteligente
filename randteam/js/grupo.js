@@ -83,24 +83,16 @@ function sortearGrupos() {
 
   btnSortear.disabled = true;
 
-  // Lógica do sorteio
-  const grupos = [];
+  // Lógica do sorteio corrigida
+  const grupos = temas.map((tema) => ({ tema, membros: [] }));
   const nomesEmbaralhados = embaralharArray([...nomes]);
 
-  for (let i = 0; i < temas.length; i++) {
-    const grupo = {
-      tema: temas[i],
-      membros: [],
-    };
-
-    while (
-      grupo.membros.length < Math.ceil(nomes.length / temas.length) &&
-      nomesEmbaralhados.length > 0
-    ) {
-      grupo.membros.push(nomesEmbaralhados.pop());
-    }
-
-    grupos.push(grupo);
+  // Distribuição round-robin dos nomes
+  let indexGrupo = 0;
+  while (nomesEmbaralhados.length > 0) {
+    const nome = nomesEmbaralhados.pop();
+    grupos[indexGrupo].membros.push(nome);
+    indexGrupo = (indexGrupo + 1) % grupos.length;
   }
 
   // Atualiza últimos dados usados
@@ -113,7 +105,6 @@ function sortearGrupos() {
     iniciarContador();
   });
 }
-
 /**
  * Inicia o contador de tempo após o sorteio.
  */
@@ -263,37 +254,37 @@ function mostrarSucesso(mensagem, persistente = false) {
 
 function gerarPDF() {
   try {
-    // Verificar se o tema está definido
-    if (!ultimoTema) {
-      mostrarErro("Nenhum tema definido para o sorteio!");
-      return;
-    }
+    console.log("[DEBUG] Iniciando geração de PDF");
 
+    // Verifica se há grupos válidos
     const grupos = Array.from(document.querySelectorAll(".grupo"))
       .map((grupo, index) => {
         const membrosElement = grupo.querySelector("p");
-        if (!membrosElement) {
-          console.warn(`Grupo ${index + 1} sem elemento de membros`);
-          return null;
-        }
-
         return {
           nome: `Grupo ${index + 1}`,
-          membros: membrosElement.textContent
-            .replace("Membros: ", "")
-            .split(", ")
-            .filter((m) => m.trim() !== ""),
+          tema:
+            grupo
+              .querySelector("h3")
+              ?.textContent.replace(`Grupo ${index + 1}: `, "") ||
+            "Tema não definido",
+          membros:
+            membrosElement?.textContent
+              .replace("Membros: ", "")
+              .split(", ")
+              .filter((m) => m.trim() !== "") || [],
         };
       })
-      .filter((g) => g !== null);
+      .filter((g) => g.membros.length > 0);
 
     if (grupos.length === 0) {
+      console.error("[ERRO] Nenhum grupo válido foi sorteado!");
       mostrarErro("Nenhum grupo válido foi sorteado!");
       return;
     }
 
     if (typeof jspdf === "undefined" || !window.jspdf) {
-      mostrarErro("Biblioteca PDF não carregada corretamente!");
+      console.error("[ERRO] Biblioteca jsPDF não carregada");
+      mostrarErro("Biblioteca PDF não está disponível!");
       return;
     }
 
@@ -304,72 +295,275 @@ function gerarPDF() {
       format: "a4",
     });
 
-    // ... (mantido o mesmo código de cores e configurações iniciais)
+    const colors = {
+      primary: "#2C3E50",
+      secondary: "#27AE60",
+      accent: "#3498DB",
+      background: "#F0F8FF",
+      header: "#2C3E50",
+      text: "#2C3E50",
+      statsHeader: "#27AE60",
+      footer: "#27AE60",
+    };
+
+    const margin = 15;
+    let y = margin;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
 
     const loadLogo = () => {
       return new Promise((resolve) => {
         const img = new Image();
         img.crossOrigin = "Anonymous";
-
         img.onload = () => {
           try {
             const logoWidth = 40;
-            const logoHeight = 15;
             const logoX = (pageWidth - logoWidth) / 2;
-
-            // Verificar espaço disponível
-            if (y + logoHeight > doc.internal.pageSize.getHeight() - 50) {
-              doc.addPage();
-              y = margin;
-            }
-
-            doc.addImage(img, "PNG", logoX, y, logoWidth, logoHeight);
-            y += logoHeight + 10;
+            doc.addImage(img, "PNG", logoX, y, logoWidth, 15);
+            y += 25;
             resolve(true);
           } catch (error) {
-            console.error("Erro na logo:", error);
+            console.error("[ERRO] Erro ao adicionar a logo:", error);
             resolve(false);
           }
         };
-
-        img.onerror = (err) => {
-          console.error("Erro ao carregar logo:", err);
+        img.onerror = () => {
+          console.warn("[AVISO] Logo não carregada, usando fallback.");
           resolve(false);
         };
-
-        img.src = "./images/logo.png";
+        img.src = "images/logo.png"; // Caminho corrigido
       });
     };
 
-    const generateContent = async () => {
+    const generateContent = () => {
       try {
-        // ... (mantido o mesmo código de geração de conteúdo)
+        // Título do relatório
+        doc.setFontSize(18);
+        doc.setTextColor(colors.primary);
+        doc.setFont("helvetica", "bold");
+        doc.text("Sorteio de Grupos por Grupos ", pageWidth / 2, y, {
+          align: "center",
+        });
+        y += 10;
+
+        // Tabela de grupos
+        const headers = ["Grupo", "Tema", "Membros"];
+        const colWidths = [25, 55, 110];
+        const rowHeight = 10;
+        const headerHeight = 8;
+
+        // Cabeçalho da tabela
+        doc.setFillColor(colors.header);
+        doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
+        doc.setFontSize(10);
+        doc.setTextColor("#FFFFFF");
+        let x = margin;
+        headers.forEach((header, i) => {
+          doc.text(header, x + 2, y + 6);
+          x += colWidths[i];
+        });
+        y += headerHeight + 2;
+
+        // Conteúdo da tabela
+        doc.setFontSize(9);
+        grupos.forEach((grupo, rowIndex) => {
+          const rowData = [
+            `Grupo ${rowIndex + 1}`,
+            grupo.tema || "Tema não definido",
+            grupo.membros?.join("\n") || "Sem membros",
+          ];
+
+          // Calcula a altura máxima da linha
+          let maxLines = 1;
+          rowData.forEach((cell, colIndex) => {
+            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
+            maxLines = Math.max(maxLines, lines.length);
+          });
+
+          // Fundo alternado para linhas
+          doc.setFillColor(rowIndex % 2 === 0 ? "#FFFFFF" : "#F8F9FA");
+          doc.rect(
+            margin,
+            y,
+            pageWidth - margin * 2,
+            rowHeight * maxLines,
+            "F"
+          );
+
+          // Adiciona o conteúdo das células
+          x = margin;
+          rowData.forEach((cell, colIndex) => {
+            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
+            lines.forEach((line, lineIndex) => {
+              doc.setTextColor(colors.text);
+              doc.text(line, x + 2, y + 5 + lineIndex * 5);
+            });
+            x += colWidths[colIndex];
+          });
+
+          y += rowHeight * maxLines + 2;
+
+          // Quebra de página se necessário
+          if (y > pageHeight - margin) {
+            doc.addPage();
+            y = margin;
+            doc.setFillColor(colors.background);
+            doc.rect(0, 0, pageWidth, pageHeight, "F");
+          }
+        });
+
+        // Estatísticas
+        y += 10;
+        doc.setFontSize(12);
+        doc.setTextColor(colors.statsHeader);
+        doc.text("ESTATÍSTICAS DO SORTEIO", margin, y);
+        y += 8;
+
+        const totalGrupos = grupos.length;
+        const totalMembros = grupos.reduce(
+          (acc, grupo) => acc + (grupo.membros ? grupo.membros.length : 0),
+          0
+        );
+        const temasUnicos = new Set(grupos.map((g) => g.tema)).size;
+
+        const statsData = [
+          ["Total de Grupos", totalGrupos],
+          ["Total de Membros", totalMembros],
+          ["Temas Únicos", temasUnicos],
+        ];
+
+        // Estilo do cabeçalho das estatísticas
+        doc.setFillColor(colors.statsHeader);
+        doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
+        doc.setFontSize(10);
+        doc.setTextColor("#FFFFFF");
+        doc.text("Itens", margin + 2, y + 6);
+        doc.text("Valores", pageWidth - margin - 20, y + 6, { align: "right" });
+        y += 10;
+
+        // Conteúdo das estatísticas
+        statsData.forEach(([label, value], index) => {
+          doc.setFillColor(index % 2 === 0 ? "#E8F5E9" : "#C8E6C9");
+          doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
+          doc.setTextColor(colors.text);
+          doc.text(label, margin + 2, y + 6);
+          doc.text(value.toString(), pageWidth - margin - 2, y + 6, {
+            align: "right",
+          });
+          y += 10;
+        });
+
+        // Rodapé
+        const footerY = pageHeight - 15;
+        const dataEmissao = new Date().toLocaleString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        doc.setFontSize(9);
+        doc.setTextColor(colors.footer);
+        doc.text(
+          "RandTeam © 2025 | Sistema de Sorteio Inteligente",
+          margin,
+          footerY
+        );
+        doc.text(
+          `Emitido em: ${dataEmissao}`,
+          pageWidth - margin - 2,
+          footerY,
+          { align: "right" }
+        );
+        doc.text(
+          "Desenvolvido por: Aquilivio Maria",
+          pageWidth - margin - 2,
+          footerY + 5,
+          { align: "right" }
+        );
+
+        // Salva o PDF
+        doc.save(`relatorio-sorteio-${Date.now()}.pdf`);
+        console.log("[DEBUG] PDF gerado com sucesso");
       } catch (error) {
-        console.error("Erro na geração:", error);
-        mostrarErro("Falha ao criar conteúdo do PDF!");
-        throw error;
+        console.error("[ERRO] Durante a geração do conteúdo:", error);
+        mostrarErro("Falha na criação do conteúdo!");
       }
     };
 
-    // Execução principal
+    // Carregamento da logo e geração do conteúdo
     loadLogo()
       .then((logoLoaded) => {
         if (!logoLoaded) {
-          doc.setFontSize(12);
+          doc.setFontSize(16);
           doc.setTextColor(colors.primary);
-          doc.text("Relatório de Grupos", pageWidth / 2, y, {
-            align: "center",
-          });
-          y += 15;
+          doc.text("RandTeam", pageWidth / 2, y, { align: "center" });
+          y += 20;
         }
-        return generateContent();
+        generateContent();
       })
       .catch((error) => {
-        console.error("Erro no fluxo principal:", error);
-        mostrarErro("Falha crítica durante o processo!");
+        console.error("[ERRO] No carregamento da logo:", error);
+        generateContent(); // Continua sem a logo
       });
   } catch (error) {
-    console.error("Erro crítico:", error);
+    console.error("[ERRO CRÍTICO]", error);
     mostrarErro("Falha grave na geração do PDF!");
   }
+}
+
+// Sistema de feedback aprimorado
+function mostrarErro(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback erro";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+function mostrarSucesso(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback sucesso";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
 }

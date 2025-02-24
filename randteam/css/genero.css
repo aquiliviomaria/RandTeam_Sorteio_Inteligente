@@ -8,6 +8,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+  background-attachment: fixed; /* Fundo fixo */
 }
 
 @keyframes gradientAnimation {
@@ -21,7 +22,6 @@ body {
     background-position: 0% 50%;
   }
 }
-
 /* Estilo do Título (H1) */
 #animated-title {
   font-size: 24px;
@@ -363,4 +363,30 @@ textarea {
     width: 18px;
     height: 18px;
   }
+}
+
+/* Sistema de Feedback - Animado */
+.feedback {
+  position: fixed;
+  right: -100%;
+  top: 20px;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 5px;
+  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  font-size: 14px;
+  max-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feedback::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

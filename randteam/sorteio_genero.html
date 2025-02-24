@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sorteio por Gênero</title>
+    <title>Sorteio de Grupos por Gênero</title>
     <link rel="stylesheet" href="css/genero.css" />
+    <!-- Link para o CSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
@@ -12,17 +13,17 @@
       <a href="../index.html">
         <img src="images/logo.png" alt="Logo" class="logo" />
       </a>
-      <h1 id="animated-title">RandTeam - Sorteio por Gênero</h1>
+      <h1 id="animated-title">RandTeam - Sorteio de Grupos por Gênero</h1>
     </header>
 
     <div class="container">
-      <!-- Campo para temas -->
+      <!-- Área para inserir os temas -->
       <div class="textarea-group">
-        <textarea id="temas" placeholder="Insira o tema..."></textarea>
+        <textarea id="temas" placeholder="Insira os temas..."></textarea>
         <button onclick="limparTemas()" class="custom-btn">Apagar Temas</button>
       </div>
 
-      <!-- Campos para nomes masculinos e femininos -->
+      <!-- Áreas para inserir nomes masculinos e femininos -->
       <div class="textarea-group-dual">
         <div class="textarea-group">
           <textarea
@@ -30,7 +31,7 @@
             placeholder="Insira os nomes masculinos..."
           ></textarea>
           <button onclick="limparNomesMasculinos()" class="custom-btn">
-            Apagar Nomes
+            Apagar Nomes Masculinos
           </button>
         </div>
         <div class="textarea-group">
@@ -39,41 +40,41 @@
             placeholder="Insira os nomes femininos..."
           ></textarea>
           <button onclick="limparNomesFemininos()" class="custom-btn">
-            Apagar Nomes
+            Apagar Nomes Femininos
           </button>
         </div>
       </div>
 
-      <!-- Campos para número de grupos e prioridade de gênero -->
-      <div class="input-group">
-        <label for="prioridade-genero">Priorizar Gênero:</label>
-        <select id="prioridade-genero">
+      <!-- Configurações do sorteio -->
+      <div class="textarea-group">
+        <label for="prioridade-genero">Prioridade de Gênero:</label>
+        <select id="prioridade-genero" class="custom-btn">
           <option value="masculino">Masculino</option>
           <option value="feminino">Feminino</option>
         </select>
       </div>
 
-      <div class="input-group">
+      <div class="textarea-group">
         <label for="numero-grupos">Número de Grupos:</label>
         <input
           type="number"
           id="numero-grupos"
-          min="1"
+          class="custom-btn"
           placeholder="Número de grupos"
         />
       </div>
 
-      <div class="input-group">
-        <label for="elementos-por-grupo">Elementos por Grupo:</label>
+      <div class="textarea-group">
+        <label for="elementos-por-grupo">Mínimo por Grupo:</label>
         <input
           type="number"
           id="elementos-por-grupo"
-          min="1"
-          placeholder="Elementos por grupo"
+          class="custom-btn"
+          placeholder="Mínimo por grupo"
         />
       </div>
 
-      <!-- Botão de sorteio -->
+      <!-- Botão para sortear -->
       <div id="left">
         <button onclick="sortearPorGenero()" class="custom-btn" id="btnSortear">
           Sortear
@@ -81,14 +82,21 @@
         <span id="contador" style="margin-left: 10px; display: none"></span>
       </div>
 
-      <!-- Resultado do sorteio -->
+      <!-- Área para exibir os resultados -->
       <div id="resultado"></div>
-      <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
-        Baixar PDF
+
+      <!-- Botão para baixar o PDF -->
+      <button
+        id="btnDownload"
+        class="custom-btn"
+        onclick="gerarPDF()"
+        style="display: none"
+      >
+        Baixar Resultado em PDF
       </button>
     </div>
 
-    <!-- Rodapé com botão Voltar sempre visível no canto inferior esquerdo -->
+    <!-- Rodapé com botão para voltar -->
     <footer class="footer">
       <nav class="nav">
         <a href="../index.html" class="custom-btn">Voltar</a>
@@ -96,5 +104,6 @@
     </footer>
 
     <script src="js/genero.js"></script>
+    <!-- Link para o JavaScript -->
   </body>
 </html>

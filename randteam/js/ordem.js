@@ -271,7 +271,7 @@ function gerarPDF() {
       prata: "#C0C0C0",
       bronze: "#CD7F32",
       text: "#2C3E50",
-      background: "#F0F8FF",
+      background: "#F0F8FF", // Alterado para combinar com o segundo exemplo
       header: "#2C3E50",
       footer: "#27AE60",
       statsHeader: "#27AE60",
@@ -282,20 +282,20 @@ function gerarPDF() {
     const pageWidth = doc.internal.pageSize.getWidth();
 
     // Configuração inicial do documento
-    doc.setFillColor(232, 244, 255);
+    doc.setFillColor(240, 248, 255); // Cor de fundo atualizada (#F0F8FF)
     doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
 
     // Função para gerar conteúdo principal
     const generateContent = () => {
       try {
-        // Cabeçalho
+        // Cabeçalho com nome do app
         doc.setFontSize(18);
         doc.setTextColor(colors.header);
         doc.setFont("helvetica", "bold");
-        doc.text("RESULTADO FINAL DO SORTEIO", pageWidth / 2, y, {
+        doc.text("Sorteio de Grupos por Ordem", pageWidth / 2, y, {
           align: "center",
-        });
-        y += 15;
+        }); // Nome do app no cabeçalho
+        y += 8;
 
         // Tema do sorteio
         doc.setFontSize(12);
@@ -307,7 +307,7 @@ function gerarPDF() {
         );
         y += 12;
 
-        // Tabela de participantes
+        // Tabela de participantes (mantida igual)
         const colWidths = [25, 150];
         const rowHeight = 10;
         const headerHeight = 8;
@@ -321,24 +321,23 @@ function gerarPDF() {
         doc.text("Participante", margin + colWidths[0] + 2, y + 6);
         y += headerHeight + 4;
 
-        // Linhas da tabela
+        // Linhas da tabela (mantido igual)
         doc.setFontSize(11);
         Estado.nomesEmbaralhados.forEach((nome, index) => {
-          // Estilização condicional
           let fillColor = [255, 255, 255];
           let textColor = colors.text;
 
           switch (index) {
             case 0:
-              fillColor = [255, 223, 186]; // Ouro
+              fillColor = [255, 223, 186];
               textColor = colors.ouro;
               break;
             case 1:
-              fillColor = [240, 240, 240]; // Prata
+              fillColor = [240, 240, 240];
               textColor = colors.prata;
               break;
             case 2:
-              fillColor = [255, 228, 196]; // Bronze
+              fillColor = [255, 228, 196];
               textColor = colors.bronze;
               break;
           }
@@ -346,12 +345,10 @@ function gerarPDF() {
           doc.setFillColor(...fillColor);
           doc.rect(margin, y, pageWidth - margin * 2, rowHeight, "F");
 
-          // Número da posição
           doc.setTextColor(textColor);
           doc.setFont("helvetica", index < 3 ? "bold" : "normal");
           doc.text(`${index + 1}.`, margin + 2, y + 7);
 
-          // Nome do participante
           doc.setTextColor(colors.text);
           doc.setFont("helvetica", "normal");
           doc.text(nome, margin + colWidths[0] + 4, y + 7, {
@@ -360,16 +357,15 @@ function gerarPDF() {
 
           y += rowHeight;
 
-          // Quebra de página
           if (y > 260) {
             doc.addPage();
             y = margin;
-            doc.setFillColor(232, 244, 255);
+            doc.setFillColor(240, 248, 255); // Cor de fundo atualizada
             doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
           }
         });
 
-        // Seção de estatísticas
+        // Seção de estatísticas (removida a data)
         y += 12;
         doc.setFontSize(12);
         doc.setTextColor(colors.statsHeader);
@@ -379,7 +375,6 @@ function gerarPDF() {
         const statsData = [
           ["Total de Participantes", Estado.nomesEmbaralhados.length],
           ["Tema do Sorteio", Estado.temaSorteio || "Não definido"],
-          ["Data/Hora", new Date().toLocaleString("pt-BR")],
         ];
 
         statsData.forEach(([label, value]) => {
@@ -394,25 +389,38 @@ function gerarPDF() {
           y += 10;
         });
 
-        // Rodapé
-        const footerY = doc.internal.pageSize.height - 15;
+        // Novo rodapé com data e desenvolvedor
+        const dataEmissao = new Date().toLocaleString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const footerY = doc.internal.pageSize.getHeight() - 20;
         doc.setFontSize(9);
         doc.setTextColor(colors.footer);
+
+        // Textos do rodapé
         doc.text(
-          "© 2024 Sistema de Sorteio - Todos os direitos reservados",
+          "© 2025 RandTeam - Todos os direitos reservados",
           margin,
           footerY
         );
         doc.text(
-          `Página ${doc.internal.getNumberOfPages()}`,
+          `Emitido em: ${dataEmissao}`,
           pageWidth - margin - 2,
           footerY,
-          {
-            align: "right",
-          }
+          { align: "right" }
+        );
+        doc.text(
+          "Created & Designed by Aquilivio Maria",
+          pageWidth - margin - 2,
+          footerY + 5,
+          { align: "right" }
         );
 
-        // Geração do PDF
         doc.save(`resultado-sorteio-${Date.now()}.pdf`);
         console.log("[DEBUG] PDF gerado com sucesso");
       } catch (error) {
@@ -421,13 +429,12 @@ function gerarPDF() {
       }
     };
 
-    // Carregamento da imagem com fallback
+    // Carregamento da imagem com fallback para nome do app
     const img = new Image();
     img.crossOrigin = "Anonymous";
 
     img.onload = () => {
       try {
-        console.log("[DEBUG] Logo carregado com sucesso");
         const logoWidth = 40;
         const logoX = (pageWidth - logoWidth) / 2;
         doc.addImage(img, "PNG", logoX, y, logoWidth, 15);
@@ -435,24 +442,76 @@ function gerarPDF() {
         generateContent();
       } catch (error) {
         console.error("[ERRO] No carregamento da imagem:", error);
-        generateContent(); // Fallback sem imagem
+        generateContent();
       }
     };
 
     img.onerror = () => {
-      console.warn("[AVISO] Logo não carregado, usando fallback");
       doc.setFontSize(16);
       doc.setTextColor(colors.header);
-      doc.text("SISTEMA DE SORTEIO", pageWidth / 2, y + 10, {
-        align: "center",
-      });
+      doc.text("RandTeam", pageWidth / 2, y + 10, { align: "center" }); // Fallback com nome do app
       y += 25;
       generateContent();
     };
 
-    img.src = "./images/logo.png";
+    img.src = "images/logo.png";
   } catch (error) {
     console.error("[ERRO CRÍTICO]", error);
     Feedback.erro("Falha grave na geração do PDF!");
   }
+}
+
+// Sistema de feedback aprimorado
+function mostrarErro(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback erro";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+function mostrarSucesso(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback sucesso";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
 }

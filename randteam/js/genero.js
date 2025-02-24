@@ -8,17 +8,44 @@ let feedbackAtivo = null;
 
 // Funções de limpeza com feedback
 function limparTemas() {
-  document.getElementById("temas").value = "";
+  const temasTextarea = document.getElementById("temas");
+
+  // Verifica se o campo de temas já está vazio
+  if (temasTextarea.value.trim() === "") {
+    mostrarErro("Não há temas para apagar!");
+    return;
+  }
+
+  // Limpa o campo
+  temasTextarea.value = "";
   mostrarSucesso("Temas apagados com sucesso!");
 }
 
 function limparNomesMasculinos() {
-  document.getElementById("nomes-masculinos").value = "";
+  const nomesMasculinosTextarea = document.getElementById("nomes-masculinos");
+
+  // Verifica se o campo de nomes masculinos já está vazio
+  if (nomesMasculinosTextarea.value.trim() === "") {
+    mostrarErro("Não há nomes masculinos para apagar!");
+    return;
+  }
+
+  // Limpa o campo
+  nomesMasculinosTextarea.value = "";
   mostrarSucesso("Nomes masculinos apagados!");
 }
 
 function limparNomesFemininos() {
-  document.getElementById("nomes-femininos").value = "";
+  const nomesFemininosTextarea = document.getElementById("nomes-femininos");
+
+  // Verifica se o campo de nomes femininos já está vazio
+  if (nomesFemininosTextarea.value.trim() === "") {
+    mostrarErro("Não há nomes femininos para apagar!");
+    return;
+  }
+
+  // Limpa o campo
+  nomesFemininosTextarea.value = "";
   mostrarSucesso("Nomes femininos apagados!");
 }
 
@@ -297,7 +324,7 @@ function gerarPDF() {
           resolve(false);
         };
 
-        img.src = "./images/logo.png";
+        img.src = "images/logo.png";
       });
     };
 
@@ -307,7 +334,9 @@ function gerarPDF() {
         doc.setFontSize(18);
         doc.setTextColor(colors.primary);
         doc.setFont("helvetica", "bold");
-        doc.text("RELATÓRIO DE GRUPOS", pageWidth / 2, y, { align: "center" });
+        doc.text("Sorteio de Grupos por Gênero", pageWidth / 2, y, {
+          align: "center",
+        });
         y += 8;
 
         doc.setFontSize(12);
@@ -426,7 +455,7 @@ function gerarPDF() {
           footerY
         );
         doc.text(
-          `Desenvolvido por: Aquilivio Maria`,
+          `Created & Designed by Aquilivio Maria`,
           pageWidth - margin - 2,
           footerY,
           {
@@ -464,4 +493,114 @@ function gerarPDF() {
     console.error(error);
     mostrarErro("Erro crítico na geração do PDF!");
   }
+}
+
+// Sistema de feedback aprimorado
+function mostrarErro(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback erro";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+function mostrarSucesso(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback sucesso";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+// Sistema de feedback aprimorado
+function mostrarErro(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback erro";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
+}
+
+function mostrarSucesso(mensagem) {
+  // Remover feedback existente
+  if (feedbackAtivo) {
+    feedbackAtivo.remove();
+  }
+
+  // Criar novo elemento
+  const feedback = document.createElement("div");
+  feedback.className = "feedback sucesso";
+  feedback.textContent = mensagem;
+
+  // Adicionar ao DOM
+  document.body.appendChild(feedback);
+  feedbackAtivo = feedback;
+
+  // Animação de entrada
+  setTimeout(() => {
+    feedback.style.right = "20px";
+  }, 100);
+
+  // Remover após 3 segundos
+  setTimeout(() => {
+    feedback.style.right = "-100%";
+    setTimeout(() => feedback.remove(), 500);
+  }, 3000);
 }

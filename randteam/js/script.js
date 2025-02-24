@@ -1,54 +1,68 @@
-function embaralhar(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
+// Animação do título
+document.addEventListener("DOMContentLoaded", function () {
+  const title = document.getElementById("animated-title");
+  const colors = ["#00e5ff", "#ff0055", "#00ff88", "#ffbb00"];
+  let index = 0;
 
-function sortearGrupos() {
-  let nomes = document.getElementById("nomes").value.trim().split("\n");
-  let temas = document.getElementById("temas").value.trim().split("\n");
-
-  if (nomes.length < 2 || temas.length < 1) {
-    alert("Adicione pelo menos dois nomes e um tema.");
-    return;
-  }
-
-  nomes = embaralhar(nomes);
-  temas = embaralhar(temas);
-
-  let resultadoHTML = "<h3>Grupos Sorteados:</h3>";
-  for (let i = 0; i < nomes.length; i++) {
-    resultadoHTML += `<p>${nomes[i]} → ${temas[i % temas.length]}</p>`;
-  }
-
-  document.getElementById("resultado").innerHTML = resultadoHTML;
-}
-
-function sortearNomes() {
-  let nomes = document.getElementById("nomes").value.trim().split("\n");
-  if (nomes.length < 2) {
-    alert("Adicione pelo menos dois nomes.");
-    return;
-  }
-  nomes = embaralhar(nomes);
-  document.getElementById("resultado").innerHTML =
-    "<h3>Nomes Sorteados:</h3><p>" + nomes.join(", ") + "</p>";
-}
-
-function sortearOrdem() {
-  let nomes = document.getElementById("nomes").value.trim().split("\n");
-  if (nomes.length < 2) {
-    alert("Adicione pelo menos dois nomes.");
-    return;
-  }
-  nomes = embaralhar(nomes);
-  let resultadoHTML = "<h3>Ordem Sorteada:</h3>";
-  nomes.forEach((nome, i) => {
-    resultadoHTML += `<p>${i + 1}. ${nome}</p>`;
-  });
-  document.getElementById("resultado").innerHTML = resultadoHTML;
-}
-
-window.addEventListener("load", function () {
-  // Esconde a tela de carregamento e mostra o conteúdo principal
-  document.getElementById("loadingScreen").style.display = "none";
-  document.querySelector(".container").style.display = "block";
+  setInterval(() => {
+    title.style.color = colors[index];
+    index = (index + 1) % colors.length;
+  }, 4000);
 });
+
+// Menu mobile
+document.querySelector(".menu-icon").addEventListener("click", function () {
+  const nav = document.querySelector(".nav");
+  nav.classList.toggle("active");
+});
+
+// Event listeners para os links do menu
+document.querySelectorAll("[data-section]").forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    showSection(this.dataset.section);
+  });
+});
+
+// Função modificada para scroll
+function showSection(section, targetId = null) {
+  // Esconder todas as seções
+  document
+    .querySelectorAll(".content-section, .main-content")
+    .forEach((div) => {
+      div.style.display = "none";
+      div.classList.remove("active");
+    });
+
+  // Mostrar seção solicitada
+  const sectionId = `${section}-content`;
+  const sectionElement = document.getElementById(sectionId);
+
+  if (sectionElement) {
+    sectionElement.style.display = "block";
+    sectionElement.classList.add("active");
+
+    // Scroll para o card específico após 100ms
+    if (targetId) {
+      setTimeout(() => {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+          });
+        }
+      }, 100);
+    }
+  }
+}
+
+// Função para esconder seções
+function hideSections() {
+  document.querySelectorAll(".content-section").forEach((div) => {
+    div.style.display = "none";
+    div.classList.remove("active");
+  });
+  document.getElementById("inicio-content").style.display = "block";
+}

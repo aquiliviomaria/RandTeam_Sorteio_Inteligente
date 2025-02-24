@@ -1,32 +1,3 @@
-/* Tela de Carregamento */
-#loading {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgb(2, 1, 15);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid white;
-  border-top: 5px solid green;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 /* Background Animado */
 body {
   background: linear-gradient(-45deg, #030411, #050f40, #072172);
@@ -34,7 +5,9 @@ body {
   animation: gradientAnimation 10s ease infinite;
   color: white;
   font-family: Arial, sans-serif;
+  background-attachment: fixed; /* Fundo fixo */
 }
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -46,7 +19,6 @@ body {
     background-position: 0% 50%;
   }
 }
-
 /* Botões Modernos */
 /* Container principal */
 .main {
@@ -69,14 +41,10 @@ body {
 /* Cada item (imagem + botão) */
 .item {
   text-align: center;
-  border: 2px solid #333;
+
   border-radius: 15px;
   padding: 10px;
   transition: transform 0.3s ease-in-out;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .item:hover {
@@ -500,6 +468,11 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
+#start:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
 /* Estilos Responsivos */
 
 /* Tablets e Celulares (até 1023px) */
@@ -584,6 +557,34 @@ h1 {
   }
 }
 
+@media (max-width: 767px) {
+  .main {
+    flex-direction: column; /* Altera a direção para vertical */
+    overflow-x: hidden; /* Remove a rolagem horizontal */
+    align-items: center; /* Centraliza os itens */
+    gap: 30px; /* Aumenta o espaçamento entre os itens */
+    padding: 15px 0; /* Adiciona padding vertical */
+  }
+
+  .item {
+    width: 100%; /* Ocupa toda a largura disponível */
+    max-width: 250px; /* Largura máxima para manter a proporção */
+    margin: 0 auto; /* Centraliza horizontalmente */
+  }
+
+  .main img {
+    width: 180px !important; /* Tamanho maior para mobile */
+    height: 180px !important;
+    margin-bottom: 10px; /* Espaço entre imagem e botão */
+  }
+
+  .custom-btn {
+    max-width: 100%; /* Botão ocupa toda a largura do .item */
+    height: 40px; /* Altura maior para melhor toque */
+    font-size: 14px; /* Tamanho de fonte legível */
+    padding: 10px 15px; /* Espaçamento interno adequado */
+  }
+}
 /* Estilo para o item de navegação ativo */
 .nav-item.active {
   background: rgba(0, 229, 255, 0.1);
@@ -697,62 +698,158 @@ h1 {
   }
 }
 /* CSS Adicional */
-.right-panel {
+/* Cores principais */
+:root {
+  --primary-color: #2c3e50; /* Azul escuro */
+  --secondary-color: #3498db; /* Azul claro */
+  --accent-color: #27ae60; /* Verde */
+  --text-color: #333; /* Cor do texto */
+  --background-color: #f8f9fa; /* Fundo claro */
+}
+
+/* Painel lateral */
+.side-panel {
   position: fixed;
   top: 0;
   right: -100%;
   width: 400px;
-  height: 100%;
-  background: rgba(2, 12, 27, 0.95);
+  height: 100vh;
+  background: var(--background-color);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease-in-out;
   z-index: 1000;
+  overflow-y: auto;
 }
 
-.right-panel.active {
+.side-panel.active {
   right: 0;
 }
 
+/* Títulos */
+.section-title {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* Cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.info-card {
+  background: darkcyan;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
+  border: 1px solid #e0e0e0;
+}
+.info-card:hover {
+  background: white;
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+  color: darkblue;
+}
+
+.card-header h4 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.card-body p {
+  color: var(--text-color);
+  margin: 0.5rem 0;
+}
+
+/* Benefícios */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.benefit-item {
+  background: darkcyan;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+.benefit-item:hover {
+  background: white;
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+  color: black;
+}
+
+/* Contato */
+.contact-card {
+  background: darkcyan;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
+  border: 1px solid #e0e0e0;
+}
+.contact-card:hover {
+  background: white;
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.contact-item p {
+  color: var(--text-color);
+  margin: 0.5rem 0;
+}
+
+/* Botão de fechar */
 .close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
-  color: #00e5ff;
-  font-size: 30px;
+  color: var(--primary-color);
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
 .close-btn:hover {
-  transform: scale(1.2);
+  color: var(--secondary-color);
 }
 
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
+/* Responsividade */
+@media (max-width: 768px) {
+  .side-panel {
+    width: 100%;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.3rem;
+  }
 }
 
-.item:hover .image-overlay {
-  display: flex;
-}
-
-.personal-info {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 30px;
-}
-
-.personal-info h3 {
-  color: #00ff88;
-  border-bottom: 2px solid #00e5ff;
-  padding-bottom: 10px;
+/* Ajuste no Conteúdo Principal */
+main {
+  padding-top: 100px; /* Ajuste conforme a altura do header */
+  padding-bottom: 100px; /* Ajuste conforme a altura do footer */
 }

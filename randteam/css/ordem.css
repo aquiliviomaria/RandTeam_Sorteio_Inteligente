@@ -5,9 +5,10 @@ body {
   animation: gradientAnimation 10s ease infinite;
   color: white;
   margin: 0;
-  padding: 0 0 80px; /* Padding para o nav fixo no fundo */
+  padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+  background-attachment: fixed; /* Fundo fixo */
 }
 
 @keyframes gradientAnimation {
@@ -21,8 +22,7 @@ body {
     background-position: 0% 50%;
   }
 }
-
-/* Header */
+/* Cabeçalho */
 .header {
   display: flex;
   justify-content: space-between;
@@ -68,26 +68,24 @@ body {
 }
 
 /* Containers principais */
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 100px auto 30px;
+}
+
 .theme-container,
-.input-container,
-.reveal-container,
 .sorteio-container,
-#resultado {
+.reveal-container {
   background: rgba(255, 255, 255, 0.1);
   padding: 30px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 90%;
-  max-width: 800px;
-  margin: 20px auto;
+  margin: 20px 0;
 }
 
-.theme-container {
-  margin-top: 100px; /* Espaço para o header fixo */
-}
-
-/* Elementos do formulário */
+/* Elementos de formulário */
 #tema {
   width: 100%;
   padding: 12px;
@@ -96,6 +94,12 @@ body {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   font-size: 16px;
+}
+
+.textarea-group-dual {
+  display: flex;
+  gap: 20px;
+  margin: 15px 0;
 }
 
 textarea {
@@ -109,22 +113,9 @@ textarea {
   resize: vertical;
 }
 
-/* Grupos de botões */
-.button-group {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.sorteio-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Botões personalizados */
+/* Botões */
 .custom-btn {
-  padding: 12px 25px;
+  padding: 8px 16px; /* Reduzido o padding */
   border: none;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -132,81 +123,78 @@ textarea {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .custom-btn:hover {
+  margin-top: auto;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid #00e5ff;
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
   transform: scale(1.05);
 }
 
-.btn-limpar {
-  background: #dc3545 !important;
-}
-
-.btn-sortear {
-  background: #007bff !important;
-}
-
-#btnDownload {
-  background: #28a745 !important;
-  order: 1; /* Coloca o botão PDF depois do de sortear */
+.custom-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Elementos do sorteio */
-.reveal-container {
-  text-align: center;
-  padding: 30px !important;
-}
-
 #contador {
-  font-size: 3em; /* Reduzido de 5em para 3em */
+  font-size: 1.5em;
   color: #00ff88;
   text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-  margin: 20px 0;
+}
+
+/* Botões de "Apagar" com hover vermelho */
+.custom-btn[onclick*="limpar"]:hover {
+  background: #ff0000; /* Vermelho ao passar o mouse */
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Botão Download */
+#btnDownload {
+  background: #28a745;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+#btnDownload:hover {
+  background: #218838;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
 }
 
 #currentName {
-  font-size: 14pt; /* Reduzido de 2em para 1.5em */
+  font-size: 2em;
   color: #00e5ff;
   min-height: 60px;
+  padding: 20px;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
-/* Feedback messages */
-.feedback {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px 25px;
-  color: white;
+#resultado {
+  margin-top: 20px;
+}
+
+#resultado li {
+  padding: 10px;
+  margin: 5px 0;
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  z-index: 1000;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.5s ease forwards;
+  list-style-type: none;
 }
 
-@keyframes slideIn {
-  from {
-    right: -100%;
-  }
-  to {
-    right: 20px;
-  }
-}
-
-.feedback.erro {
-  background-color: #dc3545;
-  border-left: 5px solid #a71d2a;
-}
-
-.feedback.sucesso {
-  background-color: #28a745;
-  border-left: 5px solid #1e7e34;
-}
-
+/* Rodapé */
 .footer {
   position: fixed;
   bottom: 0;
@@ -214,23 +202,33 @@ textarea {
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
   padding: 15px;
-  display: flex;
-  justify-content: flex-start; /* Alinha o botão à esquerda */
-  gap: 20px;
-  z-index: 1000;
-}
-
-.nav {
-  margin-left: 15px; /* Adiciona um pequeno espaçamento da borda esquerda */
 }
 
 .nav .custom-btn {
+  background: #124072;
   text-decoration: none;
-  padding: 10px 20px;
-  background-color: #124072;
+}
+
+/* Feedback */
+.feedback {
+  position: fixed;
+  top: 20px;
+  right: -100%;
+  padding: 15px 25px;
   color: white;
   border-radius: 5px;
-  font-size: 16px;
+  z-index: 1000;
+  transition: right 0.5s ease;
+}
+
+.feedback.ativo {
+  right: 20px;
+}
+.feedback.erro {
+  background: #dc3545;
+}
+.feedback.sucesso {
+  background: #28a745;
 }
 
 /* Responsividade */
@@ -240,40 +238,23 @@ textarea {
     padding: 10px;
   }
 
-  .logo {
-    margin-bottom: 10px;
-  }
-
   #animated-title {
     font-size: 20px;
+    margin: 10px 0;
+  }
+
+  .container {
+    margin-top: 140px;
+    padding: 15px;
   }
 
   .theme-container,
-  .input-container,
-  .reveal-container,
-  .sorteio-container,
-  #resultado {
+  .sorteio-container {
     padding: 20px;
-    margin: 15px auto;
-  }
-
-  .theme-container {
-    margin-top: 80px;
-  }
-
-  #contador {
-    font-size: 2em; /* Reduzido para telas menores */
   }
 
   #currentName {
-    font-size: 1.2em; /* Reduzido para telas menores */
-  }
-
-  .feedback {
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    font-size: 0.9em;
+    font-size: 1.5em;
   }
 }
 
@@ -284,18 +265,72 @@ textarea {
 
   .custom-btn {
     width: 100%;
-    padding: 12px;
+    margin: 5px 0;
   }
 
   .button-group {
     flex-direction: column;
   }
+}
 
-  #contador {
-    font-size: 1.5em; /* Tamanho menor para telas muito pequenas */
+/* Sistema de Feedback - Animado */
+.feedback {
+  position: fixed;
+  right: -100%;
+  top: 20px;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 5px;
+  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  font-size: 14px;
+  max-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feedback::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.feedback.erro {
+  background: #dc3545;
+  border-left: 5px solid #a71d2a;
+}
+
+.feedback.erro::before {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+}
+
+.feedback.sucesso {
+  background: #28a745;
+  border-left: 5px solid #1e7e34;
+}
+
+.feedback.sucesso::before {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .feedback {
+    top: auto;
+    bottom: 20px;
+    max-width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: calc(100% - 40px);
   }
 
-  #currentName {
-    font-size: 1em; /* Tamanho menor para telas muito pequenas */
+  .feedback::before {
+    width: 18px;
+    height: 18px;
   }
 }

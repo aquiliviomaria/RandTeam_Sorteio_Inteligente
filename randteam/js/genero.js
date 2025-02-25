@@ -402,7 +402,7 @@ function gerarPDF() {
           }
         });
 
-        // Seção de Estatísticas (NOVA)
+        // Seção de Estatísticas
         y += 10;
         doc.setFontSize(12);
         doc.setTextColor(colors.statsHeader);
@@ -495,7 +495,7 @@ function gerarPDF() {
   }
 }
 
-// Sistema de feedback aprimorado
+// Sistema de feedback
 function mostrarErro(mensagem) {
   // Remover feedback existente
   if (feedbackAtivo) {

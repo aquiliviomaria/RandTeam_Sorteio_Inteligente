@@ -29,8 +29,8 @@ body {
   text-transform: uppercase;
   transition: color 0.3s ease-in-out;
   animation: colorChange 3s infinite;
-  text-align: center; /* Centraliza o texto */
-  flex-grow: 1; /* Ocupa o espaço restante no header */
+  text-align: center;
+  flex-grow: 1;
 }
 
 /* Animação para mudar a cor do H1 */
@@ -112,7 +112,7 @@ textarea {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   min-height: 100px;
-  width: 100%; /* Ocupa a largura total */
+  width: 100%;
 }
 
 #left {
@@ -128,7 +128,7 @@ textarea {
 
 /* Botões personalizados */
 .custom-btn {
-  padding: 8px 16px; /* Reduzido o padding */
+  padding: 8px 16px;
   border: none;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -148,7 +148,7 @@ textarea {
 
 /* Botões de "Apagar" com hover vermelho */
 .custom-btn[onclick*="limpar"]:hover {
-  background: #ff0000; /* Vermelho ao passar o mouse */
+  background: #ff0000;
   border: 1px solid #00e5ff;
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
@@ -208,13 +208,13 @@ textarea {
   background: rgba(0, 0, 0, 0.3);
   padding: 15px;
   display: flex;
-  justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+  justify-content: flex-start;
   gap: 20px;
   z-index: 1000;
 }
 
 .nav {
-  margin-left: 15px; /* Espaçamento da borda esquerda */
+  margin-left: 15px;
 }
 
 .nav .custom-btn {

@@ -477,7 +477,7 @@ function gerarPDF() {
           { align: "right" }
         );
         doc.text(
-          "Desenvolvido por: Aquilivio Maria",
+          "Created & Designed by Aquilivio Maria",
           pageWidth - margin - 2,
           footerY + 5,
           { align: "right" }

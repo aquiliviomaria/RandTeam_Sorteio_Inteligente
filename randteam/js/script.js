@@ -24,7 +24,7 @@ document.querySelectorAll("[data-section]").forEach((link) => {
   });
 });
 
-// Função modificada para scroll
+// Função para scroll
 function showSection(section, targetId = null) {
   // Esconder todas as seções
   document

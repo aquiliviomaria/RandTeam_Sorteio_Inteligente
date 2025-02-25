@@ -251,7 +251,7 @@ function gerarPDF() {
       return;
     }
 
-    // Verificação aprimorada da biblioteca
+    // Verificação da biblioteca
     if (typeof jspdf === "undefined" || !window.jspdf) {
       console.error("[ERRO] Biblioteca jsPDF não carregada");
       Feedback.erro("Biblioteca PDF não está disponível!");
@@ -282,7 +282,7 @@ function gerarPDF() {
     const pageWidth = doc.internal.pageSize.getWidth();
 
     // Configuração inicial do documento
-    doc.setFillColor(240, 248, 255); // Cor de fundo atualizada (#F0F8FF)
+    doc.setFillColor(240, 248, 255);
     doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
 
     // Função para gerar conteúdo principal
@@ -294,7 +294,7 @@ function gerarPDF() {
         doc.setFont("helvetica", "bold");
         doc.text("Sorteio de Grupos por Ordem", pageWidth / 2, y, {
           align: "center",
-        }); // Nome do app no cabeçalho
+        });
         y += 8;
 
         // Tema do sorteio
@@ -307,7 +307,7 @@ function gerarPDF() {
         );
         y += 12;
 
-        // Tabela de participantes (mantida igual)
+        // Tabela de participantes
         const colWidths = [25, 150];
         const rowHeight = 10;
         const headerHeight = 8;
@@ -321,26 +321,11 @@ function gerarPDF() {
         doc.text("Participante", margin + colWidths[0] + 2, y + 6);
         y += headerHeight + 4;
 
-        // Linhas da tabela (mantido igual)
+        // Linhas da tabela
         doc.setFontSize(11);
         Estado.nomesEmbaralhados.forEach((nome, index) => {
           let fillColor = [255, 255, 255];
           let textColor = colors.text;
-
-          switch (index) {
-            case 0:
-              fillColor = [255, 223, 186];
-              textColor = colors.ouro;
-              break;
-            case 1:
-              fillColor = [240, 240, 240];
-              textColor = colors.prata;
-              break;
-            case 2:
-              fillColor = [255, 228, 196];
-              textColor = colors.bronze;
-              break;
-          }
 
           doc.setFillColor(...fillColor);
           doc.rect(margin, y, pageWidth - margin * 2, rowHeight, "F");
@@ -360,12 +345,12 @@ function gerarPDF() {
           if (y > 260) {
             doc.addPage();
             y = margin;
-            doc.setFillColor(240, 248, 255); // Cor de fundo atualizada
+            doc.setFillColor(240, 248, 255);
             doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
           }
         });
 
-        // Seção de estatísticas (removida a data)
+        // Seção de estatísticas
         y += 12;
         doc.setFontSize(12);
         doc.setTextColor(colors.statsHeader);
@@ -389,7 +374,7 @@ function gerarPDF() {
           y += 10;
         });
 
-        // Novo rodapé com data e desenvolvedor
+        // Rodapé com data e desenvolvedor
         const dataEmissao = new Date().toLocaleString("pt-BR", {
           day: "2-digit",
           month: "2-digit",
@@ -461,7 +446,7 @@ function gerarPDF() {
   }
 }
 
-// Sistema de feedback aprimorado
+// Sistema de feedback
 function mostrarErro(mensagem) {
   // Remover feedback existente
   if (feedbackAtivo) {

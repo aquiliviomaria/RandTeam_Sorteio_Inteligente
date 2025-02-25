@@ -115,7 +115,7 @@ textarea {
 
 /* Botões */
 .custom-btn {
-  padding: 8px 16px; /* Reduzido o padding */
+  padding: 8px 16px;
   border: none;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -149,7 +149,7 @@ textarea {
 
 /* Botões de "Apagar" com hover vermelho */
 .custom-btn[onclick*="limpar"]:hover {
-  background: #ff0000; /* Vermelho ao passar o mouse */
+  background: #ff0000;
   border: 1px solid #00e5ff;
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }

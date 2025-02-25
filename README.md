@@ -2,6 +2,14 @@
 
 O **RandTeam** é uma ferramenta intuitiva e eficiente para realizar sorteios de temas entre grupos. Foi projetado para facilitar a distribuição de temas de forma justa e organizada, seja para trabalhos em equipe, apresentações ou qualquer outra atividade que exija divisão de tarefas.
 
+## 🌟 **Por que criei o RandTeam?**
+
+Sou o representante da minha turma e, muitas vezes, sou encarregado de formar grupos para trabalhos e actividades. No entanto, sempre que fazia isso manualmente, alguns colegas reclamavam, dizendo que queriam estar com determinados amigos ou que eu estava favorecendo alguém. Isso gerava conflitos e tornava a tarefa muito estressante.
+
+Cansado dessa situação, pensei: como posso resolver isso de forma justa e imparcial? Foi assim que surgiu a ideia do RandTeam. Um sistema que realiza sorteios de forma totalmente aleatória e transparente, evitando discussões e garantindo que todos tenham as mesmas oportunidades.
+
+Agora, com o RandTeam, os grupos são formados de maneira automática e justa, eliminando qualquer suspeita de favoritismo! 🚀
+
 ## 🎯 **Como Funciona?**
 
 ### 1️⃣ **Entrada de Dados**

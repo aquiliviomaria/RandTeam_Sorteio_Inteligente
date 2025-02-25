@@ -1,4 +1,12 @@
-/* Background Animado */
+/* Cores principais */
+:root {
+  --primary-color: #2c3e50; /* Azul escuro */
+  --secondary-color: #3498db; /* Azul claro */
+  --accent-color: #27ae60; /* Verde */
+  --text-color: #333; /* Cor do texto */
+  --background-color: #f8f9fa; /* Fundo claro */
+}
+
 body {
   background: linear-gradient(-45deg, #030411, #050f40, #072172);
   background-size: 400% 400%;
@@ -19,7 +27,7 @@ body {
     background-position: 0% 50%;
   }
 }
-/* Botões Modernos */
+
 /* Container principal */
 .main {
   display: flex;
@@ -55,7 +63,7 @@ body {
 .main img {
   width: 120px; /* Tamanho menor para as imagens */
   height: 150px;
-  border-radius: 10px; /* Bordas arredondadas nas imagens */
+  border-radius: 10px;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -67,17 +75,16 @@ body {
 /* Estilo dos botões */
 .custom-btn {
   color: white;
-  font-size: 14px; /* Tamanho de fonte menor */
-
-  padding: 8px 12px; /* Ajuste no padding para controlar a altura */
+  font-size: 14px;
+  padding: 8px 12px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid transparent;
   transition: all 0.3s ease;
   cursor: pointer;
-  width: 150px; /* Largura total */
-  margin: 15px 0 0 0; /* Espaço acima do botão */
-  text-align: center; /* Centraliza o texto */
+  width: 150px;
+  margin: 15px 0 0 0;
+  text-align: center;
   align-self: flex-start;
   height: 5px;
 }
@@ -97,7 +104,7 @@ body {
     box-shadow: 0 0 0 rgba(4, 165, 152, 0.5);
   }
   50% {
-    background: rgba(3, 175, 123, 0.8); /* Cor laranja */
+    background: rgba(3, 175, 123, 0.8);
     box-shadow: 0 0 20px rgba(26, 248, 182, 0.8);
   }
   100% {
@@ -110,7 +117,6 @@ body {
 .custom-btn:active {
   animation: colorExplosion 0.5s ease-in-out;
 }
-/* Aplicar animação ao clicar */
 
 /* Social Icons */
 .social-icons img {
@@ -327,8 +333,8 @@ h1 {
   .custom-btn {
     width: 100%;
     max-width: 200px;
-    height: 30px; /* Altura reduzida */
-    padding: 5px 10px; /* Ajuste do padding */
+    height: 30px;
+    padding: 5px 10px;
     font-size: 12px; /* Fonte menor para mobile */
   }
 
@@ -451,8 +457,8 @@ h1 {
 .custom-btn {
   width: 100%;
   max-width: 200px;
-  height: 40px; /* Altura reduzida */
-  padding: 8px 15px; /* Ajuste do padding */
+  height: 40px;
+  padding: 8px 15px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
@@ -493,7 +499,7 @@ h1 {
     display: none; /* Esconde a navegação padrão */
     flex-direction: column;
     position: absolute;
-    top: 70px; /* Ajuste conforme a altura do header */
+    top: 70px;
     right: 20px;
     background: linear-gradient(90deg, #020c1b, #03224c);
     border: 2px solid #00e5ff;
@@ -501,7 +507,7 @@ h1 {
     padding: 10px;
     box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
     width: auto; /* Largura automática (não muito grande) */
-    min-width: 150px; /* Largura mínima */
+    min-width: 150px;
   }
 
   .nav.active {
@@ -561,15 +567,15 @@ h1 {
   .main {
     flex-direction: column; /* Altera a direção para vertical */
     overflow-x: hidden; /* Remove a rolagem horizontal */
-    align-items: center; /* Centraliza os itens */
+    align-items: center;
     gap: 30px; /* Aumenta o espaçamento entre os itens */
     padding: 15px 0; /* Adiciona padding vertical */
   }
 
   .item {
-    width: 100%; /* Ocupa toda a largura disponível */
-    max-width: 250px; /* Largura máxima para manter a proporção */
-    margin: 0 auto; /* Centraliza horizontalmente */
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
   }
 
   .main img {
@@ -696,15 +702,6 @@ h1 {
     padding: 10px 20px;
     font-size: 14px;
   }
-}
-/* CSS Adicional */
-/* Cores principais */
-:root {
-  --primary-color: #2c3e50; /* Azul escuro */
-  --secondary-color: #3498db; /* Azul claro */
-  --accent-color: #27ae60; /* Verde */
-  --text-color: #333; /* Cor do texto */
-  --background-color: #f8f9fa; /* Fundo claro */
 }
 
 /* Painel lateral */

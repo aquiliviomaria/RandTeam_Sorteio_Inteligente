@@ -208,7 +208,6 @@ textarea {
   background: #124072;
   text-decoration: none;
 }
-
 /* Feedback */
 .feedback {
   position: fixed;
@@ -219,16 +218,41 @@ textarea {
   border-radius: 5px;
   z-index: 1000;
   transition: right 0.5s ease;
+  max-width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .feedback.ativo {
   right: 20px;
 }
+
 .feedback.erro {
   background: #dc3545;
+  border-left: 5px solid #a71d2a;
 }
+
 .feedback.sucesso {
   background: #28a745;
+  border-left: 5px solid #1e7e34;
+}
+
+.feedback::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.feedback.erro::before {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+}
+
+.feedback.sucesso::before {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
 }
 
 /* Responsividade */
@@ -237,7 +261,9 @@ textarea {
     flex-direction: column;
     padding: 10px;
   }
-
+  #tema {
+    width: auto;
+  }
   #animated-title {
     font-size: 20px;
     margin: 10px 0;
@@ -256,13 +282,24 @@ textarea {
   #currentName {
     font-size: 1.5em;
   }
+
+  .feedback {
+    max-width: 90%;
+  }
+
+  .feedback::before {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 @media (max-width: 480px) {
   #animated-title {
     font-size: 18px;
   }
-
+  #tema {
+    width: auto;
+  }
   .custom-btn {
     width: 100%;
     margin: 5px 0;
@@ -270,67 +307,5 @@ textarea {
 
   .button-group {
     flex-direction: column;
-  }
-}
-
-/* Sistema de Feedback - Animado */
-.feedback {
-  position: fixed;
-  right: -100%;
-  top: 20px;
-  padding: 15px 25px;
-  color: white;
-  border-radius: 5px;
-  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-  font-size: 14px;
-  max-width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.feedback::before {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.feedback.erro {
-  background: #dc3545;
-  border-left: 5px solid #a71d2a;
-}
-
-.feedback.erro::before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
-}
-
-.feedback.sucesso {
-  background: #28a745;
-  border-left: 5px solid #1e7e34;
-}
-
-.feedback.sucesso::before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .feedback {
-    top: auto;
-    bottom: 20px;
-    max-width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
-    width: calc(100% - 40px);
-  }
-
-  .feedback::before {
-    width: 18px;
-    height: 18px;
   }
 }

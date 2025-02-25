@@ -227,13 +227,38 @@ const RevelacaoController = {
   },
 };
 
-// Funções auxiliares
 function limparTodos() {
+  const tema = DOM.tema.value.trim(); // Pega o valor do campo "tema" e remove espaços em branco
+  const entrada = DOM.entrada.value.trim(); // Pega o valor do campo "entrada" e remove espaços em branco
+
+  if (!tema && !entrada) {
+    // Ambos os campos estão vazios
+    Feedback.erro("Os campos já estão vazios!");
+    return; // Sai da função, pois não há nada para limpar
+  }
+
+  // Pelo menos um campo tem conteúdo
+  let mensagemSucesso = "";
+
+  if (tema && entrada) {
+    // Ambos os campos tinham conteúdo
+    mensagemSucesso = "Os campos 'tema' e 'entrada' foram limpos!";
+  } else if (tema) {
+    // Apenas o campo 'tema' tinha conteúdo
+    mensagemSucesso = "O campo 'tema' foi limpo!";
+  } else if (entrada) {
+    // Apenas o campo 'entrada' tinha conteúdo
+    mensagemSucesso = "O campo 'entrada' foi limpo!";
+  }
+
+  // Limpa os campos
   DOM.tema.value = "";
   DOM.entrada.value = "";
   DOM.resultado.innerHTML = "";
   DOM.btnDownload.style.display = "none";
-  Feedback.sucesso("Todos os campos foram limpos!");
+
+  // Exibe feedback de sucesso
+  Feedback.sucesso(mensagemSucesso);
 }
 
 function gerarPDF() {

@@ -513,7 +513,7 @@ function gerarPDF() {
   }
 }
 
-// Sistema de feedback aprimorado
+// Sistema de feedback
 function mostrarErro(mensagem) {
   // Remover feedback existente
   if (feedbackAtivo) {

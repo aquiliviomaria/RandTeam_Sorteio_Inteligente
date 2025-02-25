@@ -708,32 +708,35 @@ h1 {
 .side-panel {
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 400px;
-  height: 100vh;
+  right: -100%; /* Inicialmente escondido */
+  width: 400px; /* Largura padrão */
+  height: 100vh; /* Altura total da tela */
   background: var(--background-color);
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease-in-out;
-  z-index: 1000;
-  overflow-y: auto;
+  transition: right 0.3s ease-in-out; /* Animação suave */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  overflow-y: auto; /* Permite rolagem vertical se necessário */
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove padding */
 }
 
+/* Painel ativo */
 .side-panel.active {
-  right: 0;
+  right: 0; /* Mostra o painel */
 }
 
 /* Títulos */
 .section-title {
   color: var(--primary-color);
   font-size: 2rem;
-  margin-bottom: 1.5rem;
+  margin: 20px;
   text-align: center;
 }
 
 .section-subtitle {
   color: var(--secondary-color);
   font-size: 1.5rem;
-  margin: 1.5rem 0;
+  margin: auto;
   text-align: center;
 }
 
@@ -833,15 +836,18 @@ h1 {
 /* Responsividade */
 @media (max-width: 768px) {
   .side-panel {
-    width: 100%;
+    width: 100%; /* Ocupa toda a largura da tela em telas menores */
+    right: -100%; /* Mantém invisível inicialmente */
   }
 
-  .section-title {
-    font-size: 1.8rem;
+  .side-panel.active {
+    right: 0; /* Mostra o painel colado à direita sem margem */
   }
+}
 
-  .section-subtitle {
-    font-size: 1.3rem;
+@media (min-width: 769px) {
+  .side-panel.active {
+    right: 20px; /* Em telas maiores, aparece com uma margem à direita */
   }
 }
 

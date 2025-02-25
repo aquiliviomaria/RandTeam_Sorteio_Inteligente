@@ -77,6 +77,8 @@ Imagine que você precisa sortear temas para uma feira de ciências com 4 grupos
 
 ## 🚀 **Pronto para Começar?**
 
-Use o **RandTeam** agora mesmo e simplifique o processo de sorteio de temas. Seja para projetos escolares, eventos corporativos ou outras atividades, ele está aqui para ajudar!
+Use o **RandTeam** agora mesmo e simplifique o processo de sorteio de temas. Seja para projetos escolares, eventos corporativos ou outras actividades, ele está aqui para ajudar!
+
+De **Aquilivio Maria Cumbe**
 
 🔗 [Acesse o RandTeam](#)

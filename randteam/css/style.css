@@ -708,16 +708,16 @@ h1 {
 .side-panel {
   position: fixed;
   top: 0;
-  right: -100%; /* Inicialmente escondido */
-  width: 400px; /* Largura padrão */
-  height: 100vh; /* Altura total da tela */
+  right: -100%;
+  width: 400px;
+  height: 100vh;
   background: var(--background-color);
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease-in-out; /* Animação suave */
-  z-index: 1000; /* Garante que fique acima de outros elementos */
-  overflow-y: auto; /* Permite rolagem vertical se necessário */
-  margin: 0; /* Remove margens */
-  padding: 0; /* Remove padding */
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
 
 /* Painel ativo */
@@ -836,23 +836,23 @@ h1 {
 /* Responsividade */
 @media (max-width: 768px) {
   .side-panel {
-    width: 100%; /* Ocupa toda a largura da tela em telas menores */
-    right: -100%; /* Mantém invisível inicialmente */
+    width: 100%;
+    right: -100%;
   }
 
   .side-panel.active {
-    right: 0; /* Mostra o painel colado à direita sem margem */
+    right: 0;
   }
 }
 
 @media (min-width: 769px) {
   .side-panel.active {
-    right: 20px; /* Em telas maiores, aparece com uma margem à direita */
+    right: 20px;
   }
 }
 
 /* Ajuste no Conteúdo Principal */
 main {
-  padding-top: 100px; /* Ajuste conforme a altura do header */
-  padding-bottom: 100px; /* Ajuste conforme a altura do footer */
+  padding-top: 100px;
+  padding-bottom: 100px;
 }

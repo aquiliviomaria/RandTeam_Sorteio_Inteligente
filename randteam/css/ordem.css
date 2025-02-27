@@ -87,7 +87,7 @@ body {
 
 /* Elementos de formulário */
 #tema {
-  width: 100%;
+  width: auto;
   padding: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;

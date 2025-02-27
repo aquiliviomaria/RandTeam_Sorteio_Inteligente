@@ -107,7 +107,7 @@ textarea {
   background: rgba(0, 0, 0, 0.2);
   color: white;
   min-height: 100px;
-  width: 100%;
+  width: auto;
 }
 
 #resultado {

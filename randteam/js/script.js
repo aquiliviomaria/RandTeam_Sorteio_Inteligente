@@ -24,7 +24,7 @@ document.querySelectorAll("[data-section]").forEach((link) => {
   });
 });
 
-// Função para scroll
+// Função para mostrar seções e destacar cards
 function showSection(section, targetId = null) {
   // Esconder todas as seções
   document
@@ -52,6 +52,11 @@ function showSection(section, targetId = null) {
             block: "center",
             inline: "center",
           });
+
+          // Adiciona a classe 'selected' ao card correspondente
+          const allCards = document.querySelectorAll(".info-card");
+          allCards.forEach((card) => card.classList.remove("selected"));
+          targetElement.classList.add("selected");
         }
       }, 100);
     }

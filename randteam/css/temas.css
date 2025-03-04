@@ -242,6 +242,7 @@ textarea {
   border: none;
   cursor: pointer;
   text-align: center;
+  margin-block-end: auto;
 }
 
 #btnDownload:hover {
@@ -438,18 +439,5 @@ textarea {
 
   .button-group {
     flex-direction: column;
-  }
-}
-
-/* Esconder o footer e mostrar o botão "Voltar" em telas menores */
-@media (max-width: 768px) {
-  .footer {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .btn-voltar {
-    display: none;
   }
 }

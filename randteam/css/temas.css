@@ -83,8 +83,10 @@ body {
   width: 90%;
   max-width: 1200px;
   margin: auto;
+  overflow-y: auto; 
+  max-height: calc(100vh - 200px); 
+  margin-bottom: 80px; 
 }
-
 /* Layout dos campos */
 .form-row {
   display: flex;
@@ -298,11 +300,18 @@ textarea {
     font-size: 20px;
   }
 
-  .container {
-    padding: 20px;
-    margin: 80px auto 20px;
+  @media (max-width: 768px) {
+    .container {
+      margin-top: 140px;
+      padding: 15px;
+      max-height: calc(100vh - 240px); 
+    }
+  
+    .footer {
+      padding: 10px;
+    }
   }
-
+  
   .form-row {
     flex-direction: column;
     gap: 25px;
@@ -328,9 +337,13 @@ textarea {
   }
 
   .container {
-    width: 95%;
+    max-height: calc(100vh - 200px); 
   }
 
+  .footer {
+    padding: 8px;
+  }
+}
   .grupo {
     padding: 15px;
   }

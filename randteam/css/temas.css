@@ -82,7 +82,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   width: 90%;
   max-width: 1200px;
-  margin: 100px auto 30px;
+  margin: 100px auto 80px;
 }
 
 /* Layout dos campos */
@@ -242,7 +242,7 @@ textarea {
   border: none;
   cursor: pointer;
   text-align: center;
-  margin-block-end: auto;
+  margin: auto;
 }
 
 #btnDownload:hover {

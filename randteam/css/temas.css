@@ -88,8 +88,40 @@ body {
 /* Layout dos campos */
 .form-row {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 20px;
   margin-bottom: 25px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Campos de texto */
+textarea,
+.custom-input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+/* Botões ao lado dos campos */
+.input-group .custom-btn {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  font-size: 16px;
 }
 
 .form-column {
@@ -99,40 +131,10 @@ body {
   gap: 20px;
 }
 
-.input-group {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
 .button-group {
   display: flex;
   gap: 10px;
   margin-top: -10px;
-}
-
-/* Áreas de texto */
-textarea {
-  flex-grow: 1;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
-  min-height: 100px;
-  width: auto;
-}
-
-.custom-input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
-  font-size: 16px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
 }
 
 /* Lista de grupos */
@@ -336,6 +338,7 @@ textarea {
     font-size: 1em;
   }
 }
+
 /* Feedback */
 .feedback {
   position: fixed;
@@ -435,5 +438,18 @@ textarea {
 
   .button-group {
     flex-direction: column;
+  }
+}
+
+/* Esconder o footer e mostrar o botão "Voltar" em telas menores */
+@media (max-width: 768px) {
+  .footer {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .btn-voltar {
+    display: none;
   }
 }

@@ -81,4 +81,4 @@ Use o **RandTeam** agora mesmo e simplifique o processo de sorteio de temas. Sej
 
 De **Aquilivio Maria Cumbe**
 
-🔗 [Acesse o RandTeam](#)
+🔗 link [randteam.vercel.app]

@@ -74,6 +74,7 @@ body {
 }
 
 /* Container principal */
+/* Container principal */
 .container {
   background: rgba(255, 255, 255, 0.1);
   padding: 30px;
@@ -82,10 +83,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   width: 90%;
   max-width: 1200px;
-  margin: auto;
-  overflow-y: auto; 
-  max-height: calc(100vh - 200px); 
-  margin-bottom: 80px; 
+  margin: 100px auto 30px; /* Ajuste a margem superior para acomodar o header fixo */
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+  margin-bottom: 80px; /* Espaço para o footer */
 }
 /* Layout dos campos */
 .form-row {
@@ -177,6 +178,7 @@ textarea {
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+  margin: 0.5%;
 }
 
 .custom-btn:hover {
@@ -266,10 +268,7 @@ textarea {
   z-index: 1000;
 }
 
-.nav {
-  margin-left: 15px;
-}
-
+/* Botão "Voltar" */
 .nav .custom-btn {
   text-decoration: none;
   padding: 10px 20px;
@@ -277,8 +276,15 @@ textarea {
   color: white;
   border-radius: 5px;
   font-size: 16px;
+  transition: all 0.3s ease;
 }
 
+.nav .custom-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
+}
 /* Responsividade */
 @media (max-width: 768px) {
   .header {
@@ -304,30 +310,35 @@ textarea {
     .container {
       margin-top: 140px;
       padding: 15px;
-      max-height: calc(100vh - 240px); 
+      max-height: calc(100vh - 240px);
     }
-  
-    .footer {
-      padding: 10px;
+    .nav .custom-btn {
+      width: 10%;
+    }
+
+    .form-row {
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .input-group {
+      flex-direction: column;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    #membros,
+    #temas {
+      min-height: 120px;
     }
   }
-  
-  .form-row {
-    flex-direction: column;
-    gap: 25px;
-  }
 
-  .input-group {
-    flex-direction: column;
-  }
-
-  .button-group {
-    flex-direction: column;
-  }
-
-  #membros,
-  #temas {
-    min-height: 120px;
+  .nav .custom-btn {
+    width: 100%;
+    text-align: left;
+    margin: 5px 0;
   }
 }
 
@@ -337,20 +348,19 @@ textarea {
   }
 
   .container {
-    max-height: calc(100vh - 200px); 
-  }
-
-  .footer {
-    padding: 8px;
+    max-height: calc(100vh - 200px);
   }
 }
-  .grupo {
-    padding: 15px;
-  }
+.custom-btn {
+  width: 100%;
+  margin: 5px 0;
+}
+.grupo {
+  padding: 15px;
+}
 
-  .grupo h3 {
-    font-size: 1em;
-  }
+.grupo h3 {
+  font-size: 1em;
 }
 
 /* Feedback */

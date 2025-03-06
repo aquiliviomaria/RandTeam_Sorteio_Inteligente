@@ -336,7 +336,7 @@ textarea {
   }
 
   .nav .custom-btn {
-    width: 100%;
+    width: auto;
     text-align: left;
     margin: 5px 0;
   }
@@ -352,7 +352,7 @@ textarea {
   }
 }
 .custom-btn {
-  width: 100%;
+  width: auto;
   margin: 5px 0;
 }
 .grupo {

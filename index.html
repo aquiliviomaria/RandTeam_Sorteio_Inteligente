@@ -36,44 +36,34 @@
       </header>
       <section class="container text-center mt-5">
         <p>Escolha um modo de sorteio:</p>
-        <div class="d-flex justify-content-center">
-         <div class="main">
-  <div class="item" onclick="showSection('sobre','grupo')">
-   
-      <img src="randteam/images/grupo.png" alt="Sorteio por Grupos" />
-    <button class="custom-btn" onclick="window.location.href='randteam/sorteio_grupo.html'">
-      Sorteio por Grupos
-    </button>
-  </div>
-  <div class="item" onclick="showSection('sobre','genero')">
-   
-      <img src="randteam/images/genero.png" alt="Sorteio por Genero" />
-
-    <button class="custom-btn" onclick="window.location.href='randteam/sorteio_genero.html'">
-      Sorteio por Genero
-    </button>
-  </div>
-  <div class="item" onclick="showSection('sobre','grupos_temas')">
-    
-      <img src="randteam/images/nomes.png" alt="Sorteio por Nomes" />
-   
-    <button class="custom-btn" onclick="window.location.href='randteam/sorteio_temas.html'">
-      Sorteio por Temas
-    </button>
-  </div>
-  <div class="item" onclick="showSection('sobre','ordem')">
-    
-      <img src="randteam/images/ordem.png" alt="Sorteio por Ordem" />
-   
-    <button class="custom-btn" onclick="window.location.href='randteam/sorteio_ordem.html'">
-      Sorteio por Ordem
-    </button>
-  </div>
-   </div>
-
-
-
-    </section>
+          <div class="d-flex justify-content-center">
+            <div class="main">
+              <div class="item" onclick="showSection('sobre','ordem')">
+                <img src="randteam/images/ordem.png" alt="Sorteio por Ordem" />
+                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_ordem.html'">
+                  Sorteio por Ordem
+                </button>
+              </div>
+              <div class="item" onclick="showSection('sobre','grupo')">
+                <img src="randteam/images/grupo.png" alt="Sorteio por Grupos" />
+                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_grupo.html'">
+                  Sorteio por Grupos
+                </button>
+              </div>
+              <div class="item" onclick="showSection('sobre','genero')">
+                <img src="randteam/images/genero.png" alt="Sorteio por Genero" />
+                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_genero.html'">
+                    Sorteio por Genero
+                </button>
+              </div>
+              <div class="item" onclick="showSection('sobre','grupos_temas')">
+                <img src="randteam/images/nomes.png" alt="Sorteio por Nomes" />
+                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_temas.html'">
+                  Sorteio por Temas
+                </button>
+              </div>
+            </div>  
+      </section>
 
     <!-- Seção Sobre -->
 <div id="sobre-content" class="content-section side-panel">
@@ -84,73 +74,69 @@
     <div class="divider"></div>
 
     <h3 class="section-subtitle">🔄 Como Funciona?</h3>
-<p class="section-description">O RandTeam tem 4 modos de sorteio, cada um feito para uma situação diferente. Escolha o que combina com você:</p>
+    <p class="section-description">O RandTeam tem 4 modos de sorteio, cada um feito para uma situação diferente. Escolha o que combina com você:</p>
 
-<div class="cards-container">
-  <div id="ordem" class="info-card">
-    <div class="card-header">🌟 Ordem Aleatória</div>
-    <div class="card-body">
-      <p>➡ Este modo sortea uma ordem de apresentação ou para jogar um jogo.</p>
-      <p>➡ O sistema embaralha os nomes e mostra quem vai primeiro, segundo, e assim por diante.</p>
-      <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
-    </div>
-  </div>
+    <div class="cards-container">
+      <div id="ordem" class="info-card">
+        <div class="card-header">🌟 Ordem Aleatória</div>
+          <div class="card-body">
+            <p>➡ Este modo sortea uma ordem de apresentação ou para jogar um jogo.</p>
+            <p>➡ O sistema embaralha os nomes e mostra quem vai primeiro, segundo, e assim por diante.</p>
+            <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+          </div>
+        </div>
+        <div id="grupo" class="info-card">
+          <div class="card-header">🤝 Criação de Grupos Equilibrados</div>
+            <div class="card-body">
+              <p>➡ Este moodo divide as pessoas em grupos sem favoretismo.</p>
+              <p>➡ Você precisa informar os nomes e quantos grupos queres formas e o RandTeam divide todo mundo de forma igual, sem preferências.</p>
+              <p>➡ Simples, rápido e eficiente.</p>
+              <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+            </div>
+          </div>
+        </div>
+        <div id="genero" class="info-card">
+          <div class="card-header">♏️ Divisão por Gênero</div>
+           <div class="card-body">
+             <p>➡ Este modo equilibra grupos com homens e mulheres.</p>
+             <p>➡ Você escolhe quantos homens ou mulheres devem ter em cada grupo, e o RandTeam cuida do resto.</p>
+             <p>➡ O sistema mistura o resto das pessoas de forma aleatória.</p>
+             <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+            </div>
+          </div>
+          <div id="grupos_temas" class="info-card">
+            <div class="card-header">🌿 Grupos + Temas</div>
+              <div class="card-body">
+                <p>➡ Este modo divide as pessoas em grupos e cada grupo receber um tema diferente.</p>
+                <p>➡ Você coloca os nomes e os temas, e o RandTeam faz a mágica de distribuir tudo de forma justa.</p>
+                <p>➡ Perfeito para trabalhos escolares ou projetos em equipe.</p>
+                <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+              </div>
+            </div>
 
-  <div id="grupos_temas" class="info-card">
-    <div class="card-header">🌿 Grupos + Temas</div>
-    <div class="card-body">
-      <p>➡ Este modo divide as pessoas em grupos e cada grupo receber um tema diferente.</p>
-      <p>➡ Você coloca os nomes e os temas, e o RandTeam faz a mágica de distribuir tudo de forma justa.</p>
-      <p>➡ Perfeito para trabalhos escolares ou projetos em equipe.</p>
-      <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
-    </div>
-  </div>
+    <div class="divider"></div>
+      <h3 class="section-subtitle">💡 Por Que Usar o RandTeam?</h3>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <p>🛠️ Fácil de usar: Só colocar os nomes e deixar o RandTeam trabalhar.</p>
+      </div>
+      <div class="benefit-item">
+        <p>⚖️ Justo: Ninguém fica de fora ou é escolhido por último.</p>
+      </div>
+      <div class="benefit-item">
+        <p>📄 Prático: Gera PDF para guardar ou partilhar.</p>
+      </div>
+      <div class="benefit-item">
+        <p>🚀 Para todos: Serve para escolas, empresas, eventos familiares e muito mais.</p>
+        </div>
+      </div>
 
-  <div id="genero" class="info-card">
-    <div class="card-header">♏️ Divisão por Gênero</div>
-    <div class="card-body">
-      <p>➡ Este modo equilibra grupos com homens e mulheres.</p>
-      <p>➡ Você escolhe quantos homens ou mulheres devem ter em cada grupo, e o RandTeam cuida do resto.</p>
-      <p>➡ O sistema mistura o resto das pessoas de forma aleatória.</p>
-      <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
-    </div>
-  </div>
+      <h2>🚀 Experimente Agora!</h2>
+      <p>O RandTeam está aqui para facilitar a sua vida. Escolha o modo, coloque os nomes e veja a mágica acontecer. <strong>Vamos começar?</strong></p>
+      <a href="index.html" id='start' style="display: inline-block; background: #007BFF; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Começar Sorteio</a>
 
-  <div id="grupo" class="info-card">
-    <div class="card-header">🤝 Criação de Grupos Equilibrados</div>
-    <div class="card-body">
-      <p>➡ Este moodo divide as pessoas em grupos sem favoretismo.</p>
-      <p>➡ Você precisa informar os nomes e quantos grupos queres formas e o RandTeam divide todo mundo de forma igual, sem preferências.</p>
-      <p>➡ Simples, rápido e eficiente.</p>
-      <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<h3 class="section-subtitle">💡 Por Que Usar o RandTeam?</h3>
-<div class="benefits-grid">
-  <div class="benefit-item">
-    <p>🛠️ Fácil de usar: Só colocar os nomes e deixar o RandTeam trabalhar.</p>
-  </div>
-  <div class="benefit-item">
-    <p>⚖️ Justo: Ninguém fica de fora ou é escolhido por último.</p>
-  </div>
-  <div class="benefit-item">
-    <p>📄 Prático: Gera PDF para guardar ou partilhar.</p>
-  </div>
-  <div class="benefit-item">
-    <p>🚀 Para todos: Serve para escolas, empresas, eventos familiares e muito mais.</p>
-  </div>
-</div>
-
-<h2>🚀 Experimente Agora!</h2>
-<p>O RandTeam está aqui para facilitar a sua vida. Escolha o modo, coloque os nomes e veja a mágica acontecer. <strong>Vamos começar?</strong></p>
-<a href="index.html" id='start' style="display: inline-block; background: #007BFF; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Começar Sorteio</a>
-
-<span class="close-btn" onclick="hideSections()">&times;</span>
-</section>
+      <span class="close-btn" onclick="hideSections()">&times;</span>
+  </section>
 </div>
 
 <!-- Seção Contato -->

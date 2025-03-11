@@ -194,16 +194,6 @@ textarea {
   list-style-type: none;
 }
 
-/* Rodapé */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-}
-
 .nav .custom-btn {
   background: #124072;
   text-decoration: none;

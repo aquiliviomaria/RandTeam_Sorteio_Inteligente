@@ -8,7 +8,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-attachment: fixed; /* Fundo fixo */
+  background-attachment: fixed; 
 }
 
 @keyframes gradientAnimation {
@@ -90,18 +90,18 @@ body {
   margin: 15px 0;
   display: flex;
   gap: 10px;
-  flex-direction: column; /* Empilha os elementos verticalmente em telas pequenas */
+  flex-direction: column; /
 }
 
 .textarea-group-dual {
   display: flex;
-  gap: 20px; /* Espaço entre os campos de texto */
-  flex-wrap: wrap; /* Permite que os campos se ajustem em telas menores */
+  gap: 20px; 
+  flex-wrap: wrap; 
 }
 
 .textarea-group-dual .textarea-group {
-  flex: 1; /* Faz com que os campos ocupem o espaço disponível */
-  min-width: 250px; /* Largura mínima para cada campo */
+  flex: 1; 
+  min-width: 250px; 
 }
 
 textarea {
@@ -239,53 +239,53 @@ textarea {
 /* Responsividade */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column; /* Empilha os elementos verticalmente */
+    flex-direction: column; 
     padding: 10px;
   }
 
   .logo {
-    margin-bottom: 10px; /* Espaço entre o logo e o título */
+    margin-bottom: 10px; 
   }
 
   .nav {
-    flex-direction: column; /* Empilha os links de navegação */
+    flex-direction: column; 
     gap: 10px;
-    align-items: center; /* Centraliza os links */
+    align-items: center; 
   }
 
   #animated-title {
-    font-size: 20px; /* Reduz o tamanho do título em telas menores */
+    font-size: 20px; 
   }
 
   .container {
-    padding: 20px; /* Reduz o padding em telas menores */
-    margin: 80px auto 20px; /* Ajusta a margem para o header fixo */
+    padding: 20px; 
+    margin: 80px auto 20px; 
   }
 
   .textarea-group {
-    flex-direction: column; /* Empilha os elementos verticalmente */
+    flex-direction: column; 
   }
 
   .custom-btn {
-    width: 100%; /* Botões ocupam a largura total */
+    width: 100%; 
   }
 }
 
 @media (max-width: 480px) {
   #animated-title {
-    font-size: 18px; /* Título menor para telas muito pequenas */
+    font-size: 18px; 
   }
 
   .container {
-    width: 95%; /* Aumenta a largura do container em telas pequenas */
+    width: 95%; 
   }
 
   .grupo {
-    padding: 15px; /* Reduz o padding dos grupos */
+    padding: 15px; /
   }
 
   .grupo h3 {
-    font-size: 1em; /* Reduz o tamanho do título do grupo */
+    font-size: 1em; 
   }
 }
 

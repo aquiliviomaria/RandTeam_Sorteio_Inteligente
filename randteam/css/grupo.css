@@ -8,7 +8,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-attachment: fixed; /* Fundo fixo */
+  background-attachment: fixed;
 }
 
 @keyframes gradientAnimation {
@@ -31,7 +31,7 @@ body {
   transition: color 0.3s ease-in-out;
   animation: colorChange 3s infinite;
   text-align: center;
-  flex-grow: 1; /* Ocupa o espaço restante no header */
+  flex-grow: 1;
 }
 
 @keyframes colorChange {
@@ -142,7 +142,7 @@ textarea {
 }
 
 .custom-btn[onclick*="limpar"]:hover {
-  background: #ff0000; /* Vermelho ao passar o mouse */
+  background: #ff0000;
   border: 1px solid #00e5ff;
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }

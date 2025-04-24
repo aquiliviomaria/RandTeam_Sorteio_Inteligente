@@ -13,7 +13,7 @@ body {
   animation: gradientAnimation 10s ease infinite;
   color: white;
   font-family: Arial, sans-serif;
-  background-attachment: fixed; /* Fundo fixo */
+  background-attachment: fixed; 
 }
 
 @keyframes gradientAnimation {
@@ -61,7 +61,7 @@ body {
 
 /* Estilo das imagens */
 .main img {
-  width: 120px; /* Tamanho menor para as imagens */
+  width: 120px; 
   height: 150px;
   border-radius: 10px;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -69,7 +69,7 @@ body {
 
 .main img:hover {
   opacity: 1;
-  transform: scale(1.1); /* Aumento suave da imagem ao passar o mouse */
+  transform: scale(1.1); 
 }
 
 /* Estilo dos botões */
@@ -261,7 +261,7 @@ h1 {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Efeito de zoom e brilho nos ícones ao passar o mouse */
+
 .social-icons img:hover {
   transform: scale(1.2);
   filter: drop-shadow(0 0 10px #00e5ff);
@@ -293,10 +293,80 @@ h1 {
 
 /* Menu Hamburguer (para telas menores) */
 .menu-icon {
-  display: none; /* Escondido por padrão */
+  display: none;
   font-size: 30px;
   color: white;
   cursor: pointer;
+}
+
+ /* Estilos adicionais */
+ .mode-selection-text {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.mode-selection-text i {
+  color: #3498db;
+  margin-right: 10px;
+}
+
+.instruction-hint {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  font-weight: normal;
+  display: block;
+  margin-top: 5px;
+}
+
+.whatsapp-link {
+  position: relative;
+  display: inline-block;
+}
+
+.whatsapp-tooltip {
+  visibility: hidden;
+  width: 160px;
+  background-color: #25D366;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+}
+
+.whatsapp-link:hover .whatsapp-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.item {
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+}
+
+.item img {
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.item img:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 /* Media Queries para Responsividade */
@@ -322,7 +392,7 @@ h1 {
   .main {
     padding: 10px;
     gap: 10px;
-    overflow-x: auto; /* Scroll horizontal */
+    overflow-x: auto; 
   }
 
   .main img {
@@ -335,7 +405,7 @@ h1 {
     max-width: 200px;
     height: 30px;
     padding: 5px 10px;
-    font-size: 12px; /* Fonte menor para mobile */
+    font-size: 12px; 
   }
 
   .footer {
@@ -357,7 +427,7 @@ h1 {
   background: linear-gradient(90deg, #020c1b, #03224c);
   border-bottom: 2px solid #00e5ff;
   box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-  position: relative; /* Para posicionar o menu corretamente */
+  position: relative; 
 }
 
 .logo {
@@ -423,7 +493,7 @@ h1 {
 }
 
 .menu-icon {
-  display: none; /* Escondido por padrão */
+  display: none; 
   font-size: 30px;
   color: white;
   cursor: pointer;
@@ -433,10 +503,10 @@ h1 {
 .main {
   padding: 20px;
   display: flex;
-  overflow-x: auto; /* Scroll horizontal */
+  overflow-x: auto; 
   gap: 20px;
-  scrollbar-width: thin; /* Para navegadores modernos */
-  scrollbar-color: #00e5ff #020c1b; /* Cor do scroll */
+  scrollbar-width: thin; 
+  scrollbar-color: #00e5ff #020c1b; 
 }
 
 /* Personaliza a barra de scroll */
@@ -492,11 +562,11 @@ h1 {
   }
 
   .menu-icon {
-    display: block; /* Mostra o ícone do menu */
+    display: block; 
   }
 
   .nav {
-    display: none; /* Esconde a navegação padrão */
+    display: none; 
     flex-direction: column;
     position: absolute;
     top: 70px;
@@ -506,21 +576,21 @@ h1 {
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-    width: auto; /* Largura automática (não muito grande) */
+    width: auto;
     min-width: 150px;
   }
 
   .nav.active {
-    display: flex; /* Mostra a navegação quando o menu está ativo */
+    display: flex; 
   }
 
   .nav-item {
-    margin: 5px 0; /* Reduz o espaçamento entre os itens */
+    margin: 5px 0; 
   }
 
   .nav-link {
-    padding: 8px 16px; /* Reduz o padding dos links */
-    font-size: 16px; /* Reduz o tamanho da fonte */
+    padding: 8px 16px; 
+    font-size: 16px; 
   }
 
   #animated-title {
@@ -535,7 +605,7 @@ h1 {
   }
 
   .custom-btn {
-    height: 35px; /* Altura reduzida para tablets */
+    height: 35px; 
     padding: 6px 12px;
     font-size: 14px;
   }
@@ -557,7 +627,7 @@ h1 {
   }
 
   .custom-btn {
-    height: 45px; /* Altura ligeiramente maior para desktop */
+    height: 45px; 
     padding: 10px 20px;
     font-size: 16px;
   }
@@ -565,11 +635,11 @@ h1 {
 
 @media (max-width: 767px) {
   .main {
-    flex-direction: column; /* Altera a direção para vertical */
-    overflow-x: hidden; /* Remove a rolagem horizontal */
+    flex-direction: column; 
+    overflow-x: hidden; 
     align-items: center;
-    gap: 30px; /* Aumenta o espaçamento entre os itens */
-    padding: 15px 0; /* Adiciona padding vertical */
+    gap: 30px; 
+    padding: 15px 0; 
   }
 
   .item {
@@ -579,16 +649,16 @@ h1 {
   }
 
   .main img {
-    width: 180px !important; /* Tamanho maior para mobile */
+    width: 180px !important; 
     height: 180px !important;
-    margin-bottom: 10px; /* Espaço entre imagem e botão */
+    margin-bottom: 10px; 
   }
 
   .custom-btn {
-    max-width: 100%; /* Botão ocupa toda a largura do .item */
-    height: 40px; /* Altura maior para melhor toque */
-    font-size: 14px; /* Tamanho de fonte legível */
-    padding: 10px 15px; /* Espaçamento interno adequado */
+    max-width: 100%; 
+    height: 40px; 
+    font-size: 14px; 
+    padding: 10px 15px;
   }
 }
 /* Estilo para o item de navegação ativo */
@@ -722,7 +792,7 @@ h1 {
 
 /* Painel ativo */
 .side-panel.active {
-  right: 0; /* Mostra o painel */
+  right: 0; 
 }
 
 /* Títulos */

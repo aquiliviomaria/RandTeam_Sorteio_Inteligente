@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RandTeam - 🏠Home</title>
+    <title>RandTeam - Home</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+ 
     <link rel="stylesheet" href="randteam/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
@@ -23,42 +25,48 @@
         <nav>
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="index.html" >🏠Home</a>
+              <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#sobre-content" data-section="sobre">ℹ️ Sobre</a>
+              <a class="nav-link" href="#sobre-content" data-section="sobre"><i class="bi bi-info-circle"></i> Sobre</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contato-content" data-section="contato">📱Contacto</a>
+              <a class="nav-link" href="#contato-content" data-section="contato"><i class="bi bi-telephone"></i> Contacto</a>
             </li>
           </ul>
         </nav>
       </header>
       <section class="container text-center mt-5">
-        <p>Escolha um modo de sorteio:</p>
+        <p class="mode-selection-text">
+          <i class="bi bi-magic"></i> Escolha um modo de sorteio: 
+          <div class="instruction-hint">
+            <i class="bi bi-info-circle"></i> Passe o mouse e de um clique sobre as imagens para
+            ver detalhes dos modos
+          </div>
+        </p>
           <div class="d-flex justify-content-center">
             <div class="main">
               <div class="item" onclick="showSection('sobre','ordem')">
                 <img src="randteam/images/ordem.png" alt="Sorteio por Ordem" />
-                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_ordem.html'">
+                <button class="custom-btn" onclick="event.stopPropagation(); window.location.href='randteam/sorteio_ordem.html'">
                   Sorteio por Ordem
                 </button>
               </div>
               <div class="item" onclick="showSection('sobre','grupo')">
                 <img src="randteam/images/grupo.png" alt="Sorteio por Grupos" />
-                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_grupo.html'">
+                <button class="custom-btn" onclick="event.stopPropagation(); window.location.href='randteam/sorteio_grupo.html'">
                   Sorteio por Grupos
                 </button>
               </div>
               <div class="item" onclick="showSection('sobre','genero')">
                 <img src="randteam/images/genero.png" alt="Sorteio por Genero" />
-                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_genero.html'">
+                <button class="custom-btn" onclick="event.stopPropagation(); window.location.href='randteam/sorteio_genero.html'">
                     Sorteio por Genero
                 </button>
               </div>
               <div class="item" onclick="showSection('sobre','grupos_temas')">
                 <img src="randteam/images/nomes.png" alt="Sorteio por Nomes" />
-                <button class="custom-btn" onclick="window.location.href='randteam/sorteio_temas.html'">
+                <button class="custom-btn" onclick="event.stopPropagation(); window.location.href='randteam/sorteio_temas.html'">
                   Sorteio por Temas
                 </button>
               </div>
@@ -68,75 +76,75 @@
     <!-- Seção Sobre -->
 <div id="sobre-content" class="content-section side-panel">
   <section class="container">
-    <h2 class="section-title">✨ Sobre o RandTeam</h2>
+    <h2 class="section-title"><i class="bi bi-stars"></i> Sobre o RandTeam</h2>
     <p class="section-description">O RandTeam é uma ferramenta prática e inteligente para criar grupos de forma justa e rápida. Seja para trabalhos escolares, eventos ou jogos, o RandTeam ajuda a dividir pessoas e tarefas sem stress. É como ter um "chefe de grupo" digital que faz tudo de forma organizada e sem favoritismos!</p>
     
     <div class="divider"></div>
 
-    <h3 class="section-subtitle">🔄 Como Funciona?</h3>
+    <h3 class="section-subtitle"><i class="bi bi-arrow-repeat"></i> Como Funciona?</h3>
     <p class="section-description">O RandTeam tem 4 modos de sorteio, cada um feito para uma situação diferente. Escolha o que combina com você:</p>
 
     <div class="cards-container"></div>
       <div id="ordem" class="info-card">
-        <div class="card-header">🌟 Ordem Aleatória</div>
+        <div class="card-header"><i class="bi bi-star-fill"></i> Ordem Aleatória</div>
           <div class="card-body">
-            <p>➡ Este modo sortea uma ordem de apresentação ou para jogar um jogo.</p>
-            <p>➡ O sistema embaralha os nomes e mostra quem vai primeiro, segundo, e assim por diante.</p>
-            <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+            <p><i class="bi bi-arrow-right"></i> Este modo sortea uma ordem de apresentação ou para jogar um jogo.</p>
+            <p><i class="bi bi-arrow-right"></i> O sistema embaralha os nomes e mostra quem vai primeiro, segundo, e assim por diante.</p>
+            <p><i class="bi bi-arrow-right"></i> No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
           </div>
         </div>
         
         <div id="grupo" class="info-card">
-          <div class="card-header">🤝 Criação de Grupos Equilibrados</div>
+          <div class="card-header"><i class="bi bi-people-fill"></i> Criação de Grupos Equilibrados</div>
             <div class="card-body">
-              <p>➡ Este moodo divide as pessoas em grupos sem favoretismo.</p>
-              <p>➡ Você precisa informar os nomes e quantos grupos queres formas e o RandTeam divide todo mundo de forma igual, sem preferências.</p>
-              <p>➡ Simples, rápido e eficiente.</p>
-              <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+              <p><i class="bi bi-arrow-right"></i> Este moodo divide as pessoas em grupos sem favoretismo.</p>
+              <p><i class="bi bi-arrow-right"></i> Você precisa informar os nomes e quantos grupos queres formas e o RandTeam divide todo mundo de forma igual, sem preferências.</p>
+              <p><i class="bi bi-arrow-right"></i> Simples, rápido e eficiente.</p>
+              <p><i class="bi bi-arrow-right"></i> No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
             </div>
           </div>
      
         <div id="genero" class="info-card">
-         <div class="card-header">♏️ Divisão por Gênero</div>
+         <div class="card-header"><i class="bi bi-gender-male"></i><i class="bi bi-gender-female"></i> Divisão por Gênero</div>
            <div class="card-body">
-             <p>➡ Este modo equilibra grupos com homens e mulheres.</p>
-             <p>➡ Você escolhe quantos homens ou mulheres devem ter em cada grupo, e o RandTeam cuida do resto.</p>
-             <p>➡ O sistema mistura o resto das pessoas de forma aleatória.</p>
-             <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+             <p><i class="bi bi-arrow-right"></i> Este modo equilibra grupos com homens e mulheres.</p>
+             <p><i class="bi bi-arrow-right"></i> Você escolhe quantos homens ou mulheres devem ter em cada grupo, e o RandTeam cuida do resto.</p>
+             <p><i class="bi bi-arrow-right"></i> O sistema mistura o resto das pessoas de forma aleatória.</p>
+             <p><i class="bi bi-arrow-right"></i> No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
             </div>
           </div>
 
           
           <div id="grupos_temas" class="info-card">
-            <div class="card-header">🌿 Grupos + Temas</div>
+            <div class="card-header"><i class="bi bi-collection"></i> Grupos + Temas</div>
               <div class="card-body">
-                <p>➡ Este modo divide as pessoas em grupos e cada grupo receber um tema diferente.</p>
-                <p>➡ Você coloca os nomes e os temas, e o RandTeam faz a mágica de distribuir tudo de forma justa.</p>
-                <p>➡ Perfeito para trabalhos escolares ou projetos em equipe.</p>
-                <p>➡ No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
+                <p><i class="bi bi-arrow-right"></i> Este modo divide as pessoas em grupos e cada grupo receber um tema diferente.</p>
+                <p><i class="bi bi-arrow-right"></i> Você coloca os nomes e os temas, e o RandTeam faz a mágica de distribuir tudo de forma justa.</p>
+                <p><i class="bi bi-arrow-right"></i> Perfeito para trabalhos escolares ou projetos em equipe.</p>
+                <p><i class="bi bi-arrow-right"></i> No final, você pode baixar a lista em PDF para guardar ou partilhar.</p>
               </div>
             </div>
 
     <div class="divider"></div>
-      <h3 class="section-subtitle">💡 Por Que Usar o RandTeam?</h3>
+      <h3 class="section-subtitle"><i class="bi bi-lightbulb"></i> Por Que Usar o RandTeam?</h3>
     <div class="benefits-grid">
       <div class="benefit-item">
-        <p>🛠️ Fácil de usar: Só colocar os nomes e deixar o RandTeam trabalhar.</p>
+        <p><i class="bi bi-tools"></i> Fácil de usar: Só colocar os nomes e deixar o RandTeam trabalhar.</p>
       </div>
       <div class="benefit-item">
-        <p>⚖️ Justo: Ninguém fica de fora ou é escolhido por último.</p>
+        <p><i class="bi bi-scale"></i> Justo: Ninguém fica de fora ou é escolhido por último.</p>
       </div>
       <div class="benefit-item">
-        <p>📄 Prático: Gera PDF para guardar ou partilhar.</p>
+        <p><i class="bi bi-file-earmark-pdf"></i> Prático: Gera PDF para guardar ou partilhar.</p>
       </div>
       <div class="benefit-item">
-        <p>🚀 Para todos: Serve para escolas, empresas, eventos familiares e muito mais.</p>
+        <p><i class="bi bi-globe"></i> Para todos: Serve para escolas, empresas, eventos familiares e muito mais.</p>
         </div>
       </div>
 
-      <h2>🚀 Experimente Agora!</h2>
+      <h2><i class="bi bi-rocket"></i> Experimente Agora!</h2>
       <p>O RandTeam está aqui para facilitar a sua vida. Escolha o modo, coloque os nomes e veja a mágica acontecer. <strong>Vamos começar?</strong></p>
-      <a href="index.html" id='start' style="display: inline-block; background: #007BFF; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Começar Sorteio</a>
+      <a href="index.html" id='start' class="btn btn-primary"><i class="bi bi-play-fill"></i> Começar Sorteio</a>
 
       <span class="close-btn" onclick="hideSections()">&times;</span>
   </section>
@@ -145,7 +153,7 @@
 <!-- Seção Contato -->
 <div id="contato-content" class="content-section side-panel">
   <section class="container">
-    <h2 class="section-title">📱 Contacto</h2>
+    <h2 class="section-title"><i class="bi bi-telephone"></i> Contacto</h2>
    
     <div class="divider"></div>
 
@@ -156,10 +164,10 @@
         </div>
         <div class="card-body">
           <div class="contact-item">
-            <p><strong>Nome:</strong> Aquilivio Maria Cumbe</p>
-            <p><strong>Email:</strong> aquiliviomaria@gmail.com</p>
-            <p><strong>Telefone:</strong> +258 87 45 44 510</p>
-            <p><strong>Localização:</strong> Inhambane</p>
+            <p><strong><i class="bi bi-person"></i> Nome:</strong> Aquilivio Maria Cumbe</p>
+            <p><strong><i class="bi bi-envelope"></i> Email:</strong> aquiliviomaria@gmail.com</p>
+            <p><strong><i class="bi bi-telephone"></i> Telefone:</strong> +258 87 45 44 510</p>
+            <p><strong><i class="bi bi-geo-alt"></i> Localização:</strong> Inhambane</p>
           </div>
         </div>
       </div>
@@ -169,11 +177,12 @@
   </section>
 </div>
 
-
       <footer class="footer">
         <div class="social-icons">
-          <a href="https://wa.me/258874544510
-          " target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/258874544510?text=Olá%20Aquilivio,%20estou%20entrando%20em%20contato%20através%20do%20RandTeam!" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="whatsapp-link">
             <img src="randteam/images/whatsapp.png" alt="WhatsApp" />
           </a>
           <a href="https://www.linkedin.com/posts/aquilivio-maria-cumbe-b2a890289_tecnologia-desenvolvimentofullstack-automaaexaeto-activity-7300216486642540544-1ynb?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEYTT1IBWSDnavll7umkZpPUpNmi3CIGzEo" target="_blank" rel="noopener noreferrer">
@@ -189,6 +198,6 @@
     </main>
 
     <script src="randteam/js/script.js"></script>
- 
+   
   </body>
 </html>

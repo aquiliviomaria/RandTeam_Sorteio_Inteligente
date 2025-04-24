@@ -319,20 +319,23 @@ function gerarPDF() {
       format: "a4",
     });
 
+    // Cores inspiradas no Bootstrap 5
     const colors = {
-      primary: "#2C3E50",
-      secondary: "#27AE60",
-      accent: "#3498DB",
-      background: "#F0F8FF",
-      header: "#2C3E50",
-      text: "#2C3E50",
-      statsHeader: "#27AE60",
-      footer: "#27AE60",
+      primary: "#0d6efd", // Azul Bootstrap
+      secondary: "#6c757d", // Cinza
+      accent: "#6610f2", // Roxo Bootstrap
+      background: "#f8f9fa", // Branco sujo
+      header: "#343a40", // Cinza escuro
+      text: "#212529", // Preto Bootstrap
+      statsHeader: "#198754", // Verde sucesso
+      footer: "#6c757d", // Cinza Bootstrap
     };
 
     const margin = 15;
     let y = margin;
+    const pageHeight = doc.internal.pageSize.height;
     const pageWidth = doc.internal.pageSize.getWidth();
+    const rodapeOffset = 25;
 
     const loadLogo = () => {
       return new Promise((resolve) => {
@@ -354,13 +357,12 @@ function gerarPDF() {
           console.warn("[AVISO] Logo não carregada, usando fallback.");
           resolve(false);
         };
-        img.src = "images/logo.png"; // Caminho corrigido
+        img.src = "images/logo.png";
       });
     };
 
     const generateContent = () => {
       try {
-        // Título do relatório
         doc.setFontSize(18);
         doc.setTextColor(colors.primary);
         doc.setFont("helvetica", "bold");
@@ -369,70 +371,71 @@ function gerarPDF() {
         });
         y += 10;
 
-        // Tabela de grupos
-        const headers = ["Grupo", "Tema", "Membros"];
-        const colWidths = [25, 55, 110];
-        const rowHeight = 10;
-        const headerHeight = 8;
-
         // Cabeçalho da tabela
+        const headers = ["Grupo", "Tema", "Membros"];
+        const colWidths = [30, 50, 100];
+        const headerHeight = 8;
+        const rowHeight = 10;
+
         doc.setFillColor(colors.header);
-        doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
+        doc.setTextColor("#ffffff");
         doc.setFontSize(10);
-        doc.setTextColor("#FFFFFF");
+        doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
+
         let x = margin;
         headers.forEach((header, i) => {
           doc.text(header, x + 2, y + 6);
           x += colWidths[i];
         });
+
         y += headerHeight + 2;
 
-        // Conteúdo da tabela
         doc.setFontSize(9);
-        grupos.forEach((grupo, rowIndex) => {
+        doc.setTextColor(colors.text);
+
+        grupos.forEach((grupo, index) => {
           const rowData = [
-            `Grupo ${rowIndex + 1}: ${grupo.nome}`,
-            grupo.tema || "Tema não definido", // Agora grupo.tema existe
-            grupo.membros?.join("\n") || "Sem membros",
+            `Grupo ${index + 1}: ${grupo.nome}`,
+            grupo.tema || "Tema não definido",
+            grupo.membros?.join(", ") || "Sem membros", // membros separados por vírgulas
           ];
 
-          // Calcula a altura máxima da linha
-          let maxLines = 1;
-          rowData.forEach((cell, colIndex) => {
-            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
-            maxLines = Math.max(maxLines, lines.length);
-          });
-
-          // Fundo alternado para linhas
-          doc.setFillColor(rowIndex % 2 === 0 ? "#FFFFFF" : "#F8F9FA");
-          doc.rect(
-            margin,
-            y,
-            pageWidth - margin * 2,
-            rowHeight * maxLines,
-            "F"
-          );
-
-          // Adiciona o conteúdo das células
-          x = margin;
-          rowData.forEach((cell, colIndex) => {
-            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
-            lines.forEach((line, lineIndex) => {
-              doc.setTextColor(colors.text);
-              doc.text(line, x + 2, y + 5 + lineIndex * 5);
-            });
-            x += colWidths[colIndex];
-          });
-
-          y += rowHeight * maxLines + 2;
-
-          // Quebra de página se necessário
-          if (y > 260) {
+          // Verifica se a próxima linha ultrapassa a área útil
+          const estimatedHeight = rowHeight + 2;
+          if (y + estimatedHeight + rodapeOffset >= pageHeight) {
             doc.addPage();
             y = margin;
-            doc.setFillColor(colors.background);
-            doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
+
+            // Novo cabeçalho após quebra de página
+            doc.setFillColor(colors.header);
+            doc.setTextColor("#ffffff");
+            doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
+
+            x = margin;
+            headers.forEach((header, i) => {
+              doc.text(header, x + 2, y + 6);
+              x += colWidths[i];
+            });
+
+            y += headerHeight + 2;
           }
+
+          // Fundo alternado tipo tabela Bootstrap
+          doc.setFillColor(index % 2 === 0 ? "#ffffff" : "#e9ecef");
+          doc.rect(margin, y, pageWidth - margin * 2, rowHeight, "F");
+
+          // Conteúdo
+          x = margin;
+          rowData.forEach((text, i) => {
+            const cellText = doc
+              .splitTextToSize(text, colWidths[i] - 4)
+              .join(", ");
+            doc.setTextColor(colors.text);
+            doc.text(cellText, x + 2, y + 6);
+            x += colWidths[i];
+          });
+
+          y += rowHeight + 2;
         });
 
         // Estatísticas
@@ -444,40 +447,38 @@ function gerarPDF() {
 
         const totalGrupos = grupos.length;
         const totalMembros = grupos.reduce(
-          (acc, grupo) => acc + (grupo.membros ? grupo.membros.length : 0),
+          (acc, g) => acc + (g.membros?.length || 0),
           0
         );
         const temasUnicos = new Set(grupos.map((g) => g.tema)).size;
 
-        const statsData = [
+        const stats = [
           ["Total de Grupos", totalGrupos],
           ["Total de Membros", totalMembros],
           ["Temas Únicos", temasUnicos],
         ];
 
-        // Estilo do cabeçalho das estatísticas
         doc.setFillColor(colors.statsHeader);
-        doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
+        doc.setTextColor("#ffffff");
         doc.setFontSize(10);
-        doc.setTextColor("#FFFFFF");
+        doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
         doc.text("Itens", margin + 2, y + 6);
-        doc.text("Valores", pageWidth - margin - 20, y + 6, { align: "right" });
+        doc.text("Valores", pageWidth - margin - 2, y + 6, { align: "right" });
         y += 10;
 
-        // Conteúdo das estatísticas
-        statsData.forEach(([label, value], index) => {
-          doc.setFillColor(index % 2 === 0 ? "#E8F5E9" : "#C8E6C9");
-          doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
+        stats.forEach(([label, val], i) => {
+          doc.setFillColor(i % 2 === 0 ? "#d1e7dd" : "#badbcc");
           doc.setTextColor(colors.text);
+          doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
           doc.text(label, margin + 2, y + 6);
-          doc.text(value.toString(), pageWidth - margin - 2, y + 6, {
+          doc.text(val.toString(), pageWidth - margin - 2, y + 6, {
             align: "right",
           });
           y += 10;
         });
 
         // Rodapé
-        const footerY = doc.internal.pageSize.height - 15;
+        const footerY = pageHeight - 15;
         const dataEmissao = new Date().toLocaleString("pt-BR", {
           day: "2-digit",
           month: "2-digit",
@@ -497,16 +498,19 @@ function gerarPDF() {
           `Emitido em: ${dataEmissao}`,
           pageWidth - margin - 2,
           footerY,
-          { align: "right" }
+          {
+            align: "right",
+          }
         );
         doc.text(
           "Created & Designed by Aquilivio Maria",
           pageWidth - margin - 2,
           footerY + 5,
-          { align: "right" }
+          {
+            align: "right",
+          }
         );
 
-        // Salva o PDF
         doc.save(`relatorio-sorteio-${Date.now()}.pdf`);
         console.log("[DEBUG] PDF gerado com sucesso");
       } catch (error) {
@@ -515,10 +519,9 @@ function gerarPDF() {
       }
     };
 
-    // Carregamento da logo e geração do conteúdo
     loadLogo()
-      .then((logoLoaded) => {
-        if (!logoLoaded) {
+      .then((logoCarregada) => {
+        if (!logoCarregada) {
           doc.setFontSize(16);
           doc.setTextColor(colors.primary);
           doc.text("RandTeam", pageWidth / 2, y, { align: "center" });
@@ -528,7 +531,7 @@ function gerarPDF() {
       })
       .catch((error) => {
         console.error("[ERRO] No carregamento da logo:", error);
-        generateContent(); // Continua sem a logo
+        generateContent();
       });
   } catch (error) {
     console.error("[ERRO CRÍTICO]", error);
@@ -589,4 +592,9 @@ function mostrarSucesso(mensagem) {
     feedback.style.right = "-100%";
     setTimeout(() => feedback.remove(), 500);
   }, 3000);
+}
+
+// Função auxiliar para mostrar o botão de download
+function mostrarBotaoDownload() {
+  document.getElementById("btnDownload").style.display = "inline-block";
 }

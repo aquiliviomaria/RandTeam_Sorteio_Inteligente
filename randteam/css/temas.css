@@ -8,7 +8,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-attachment: fixed; /* Fundo fixo */
+  background-attachment: fixed;
 }
 
 @keyframes gradientAnimation {
@@ -84,6 +84,7 @@ body {
   max-width: 800px;
   margin: 100px auto 30px;
 }
+
 /* Layout dos campos */
 .form-row {
   display: flex;
@@ -96,6 +97,16 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
 }
 
 /* Campos de texto */
@@ -116,24 +127,60 @@ textarea {
   min-height: 150px;
 }
 
-/* Botões ao lado dos campos */
-.input-group .custom-btn {
-  flex-shrink: 0;
-  padding: 12px 20px;
-  font-size: 16px;
+/* Botões personalizados */
+.custom-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-.form-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.custom-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.05);
 }
 
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: -10px;
+/* Botões específicos */
+.btn-primary {
+  background: rgba(0, 229, 255, 0.2);
+}
+
+.btn-primary:hover {
+  background: rgba(0, 229, 255, 0.3);
+}
+
+.btn-success {
+  background: rgba(40, 167, 69, 0.7);
+}
+
+.btn-success:hover {
+  background: rgba(40, 167, 69, 0.9);
+}
+
+.btn-secondary {
+  background: rgba(108, 117, 125, 0.5);
+}
+
+.btn-secondary:hover {
+  background: rgba(108, 117, 125, 0.7);
+}
+
+/* Botões de perigo */
+.custom-btn.danger {
+  background: rgba(220, 53, 69, 0.5);
+}
+
+.custom-btn.danger:hover {
+  background: rgba(220, 53, 69, 0.7);
+  border: 1px solid #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 /* Lista de grupos */
@@ -161,47 +208,6 @@ textarea {
   margin-bottom: 5px;
   border-radius: 5px;
   color: white;
-}
-
-/* Botões personalizados */
-.custom-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  margin: 0.5%;
-}
-
-.custom-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #00e5ff;
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-  transform: scale(1.05);
-}
-
-/* Botões de perigo (vermelho) */
-.custom-btn.danger {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.custom-btn.danger:hover {
-  background: red;
-  border: 1px solid rgb(4, 158, 163);
-  box-shadow: 0 0 10px rgb(10, 175, 148);
-  transform: scale(1.05);
 }
 
 /* Resultados */
@@ -242,7 +248,6 @@ textarea {
   border: none;
   cursor: pointer;
   text-align: center;
-  margin: auto;
 }
 
 #btnDownload:hover {
@@ -265,83 +270,6 @@ textarea {
   border: 1px solid #00e5ff;
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
   transform: scale(1.05);
-}
-/* Responsividade */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  .logo {
-    margin-bottom: 10px;
-  }
-
-  .nav {
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-
-  #animated-title {
-    font-size: 20px;
-  }
-
-  @media (max-width: 768px) {
-    .container {
-      margin-top: 140px;
-      padding: 15px;
-      max-height: calc(100vh - 240px);
-    }
-    .nav .custom-btn {
-      width: 10%;
-    }
-
-    .form-row {
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .input-group {
-      flex-direction: column;
-    }
-
-    .button-group {
-      flex-direction: column;
-    }
-
-    #membros,
-    #temas {
-      min-height: 120px;
-    }
-  }
-
-  .nav .custom-btn {
-    width: auto;
-    text-align: left;
-    margin: 5px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  #animated-title {
-    font-size: 18px;
-  }
-
-  .container {
-    max-height: calc(100vh - 200px);
-  }
-}
-.custom-btn {
-  width: auto;
-  margin: 5px 0;
-}
-.grupo {
-  padding: 15px;
-}
-
-.grupo h3 {
-  font-size: 1em;
 }
 
 /* Feedback */
@@ -397,12 +325,19 @@ textarea {
     flex-direction: column;
     padding: 10px;
   }
-  #tema {
-    width: auto;
+
+  .logo {
+    margin-bottom: 10px;
   }
+
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
   #animated-title {
     font-size: 20px;
-    margin: 10px 0;
   }
 
   .container {
@@ -410,13 +345,28 @@ textarea {
     padding: 15px;
   }
 
-  .theme-container,
-  .sorteio-container {
-    padding: 20px;
+  .form-row {
+    flex-direction: column;
+    gap: 25px;
   }
 
-  #currentName {
-    font-size: 1.5em;
+  .input-group {
+    flex-direction: column;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  #membros,
+  #temas {
+    min-height: 120px;
+  }
+
+  .nav .custom-btn {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
   }
 
   .feedback {
@@ -433,15 +383,21 @@ textarea {
   #animated-title {
     font-size: 18px;
   }
-  #tema {
-    width: auto;
+
+  .container {
+    width: 95%;
   }
+
+  .grupo {
+    padding: 15px;
+  }
+
+  .grupo h3 {
+    font-size: 1em;
+  }
+
   .custom-btn {
     width: 100%;
     margin: 5px 0;
-  }
-
-  .button-group {
-    flex-direction: column;
   }
 }

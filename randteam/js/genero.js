@@ -263,7 +263,8 @@ function gerarPDF() {
         membros: grupo
           .querySelector("p")
           .textContent.replace("Membros: ", "")
-          .split(", "),
+          .split(", ")
+          .map((m) => m.trim()),
       })
     );
 
@@ -285,27 +286,28 @@ function gerarPDF() {
     });
 
     const colors = {
-      primary: "#2C3E50",
-      secondary: "#27AE60",
-      background: "#E6F0FF",
-      header: "#2C3E50",
-      text: "#2C3E50",
-      statsHeader: "#27AE60",
-      footer: "#2C3E50",
+      primary: "#0d6efd", // Bootstrap azul
+      secondary: "#198754", // Bootstrap verde
+      background: "#f8f9fa", // cinza claro
+      header: "#343a40", // cinza escuro
+      text: "#212529", // texto Bootstrap
+      statsHeader: "#0d6efd",
+      footer: "#6c757d",
     };
 
     const margin = 15;
+    const footerHeight = 25;
     let y = margin;
+    const pageHeight = doc.internal.pageSize.getHeight();
     const pageWidth = doc.internal.pageSize.getWidth();
 
     doc.setFillColor(colors.background);
-    doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
+    doc.rect(0, 0, pageWidth, pageHeight, "F");
 
     const loadLogo = () => {
       return new Promise((resolve) => {
         const img = new Image();
         img.crossOrigin = "Anonymous";
-
         img.onload = () => {
           try {
             const logoWidth = 40;
@@ -318,12 +320,10 @@ function gerarPDF() {
             resolve(false);
           }
         };
-
         img.onerror = () => {
           console.warn("Logo não carregada");
           resolve(false);
         };
-
         img.src = "images/logo.png";
       });
     };
@@ -341,19 +341,20 @@ function gerarPDF() {
 
         doc.setFontSize(12);
         doc.setTextColor(colors.secondary);
+        doc.setFont("helvetica", "normal");
         doc.text(`Tema: ${tema}`, pageWidth / 2, y, { align: "center" });
         y += 15;
 
-        // Tabela de grupos
+        // Tabela
         const headers = ["Grupo", "Membros"];
-        const colWidths = [40, 150];
-        const rowHeight = 10;
+        const colWidths = [40, pageWidth - margin * 2 - 40];
         const headerHeight = 8;
+        const rowHeight = 10;
 
         doc.setFillColor(colors.header);
-        doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
+        doc.setTextColor("#ffffff");
         doc.setFontSize(10);
-        doc.setTextColor("#FFFFFF");
+        doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
         let x = margin;
         headers.forEach((header, i) => {
           doc.text(header, x + 2, y + 6);
@@ -361,51 +362,44 @@ function gerarPDF() {
         });
         y += headerHeight + 2;
 
-        grupos.forEach((grupo, rowIndex) => {
-          const rowData = [
-            grupo.nome,
-            grupo.membros.join(", ") || "Sem membros",
-          ];
+        grupos.forEach((grupo, index) => {
+          const rowData = [grupo.nome, grupo.membros.join(", ")];
 
-          let maxLines = 1;
-          rowData.forEach((cell, colIndex) => {
-            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
-            maxLines = Math.max(maxLines, lines.length);
-          });
+          const heightRequired = rowHeight;
 
-          doc.setFillColor(rowIndex % 2 === 0 ? "#FFFFFF" : "#F8F9FA");
-          doc.rect(
-            margin,
-            y,
-            pageWidth - margin * 2,
-            rowHeight * maxLines,
-            "F"
-          );
-
-          x = margin;
-          rowData.forEach((cell, colIndex) => {
-            const lines = doc.splitTextToSize(cell, colWidths[colIndex] - 4);
-            lines.forEach((line, lineIndex) => {
-              doc.setTextColor(colors.text);
-              doc.text(line, x + 2, y + 5 + lineIndex * 5);
-            });
-            x += colWidths[colIndex];
-          });
-
-          y += rowHeight * maxLines + 2;
-
-          if (y > 260) {
+          // Verificar espaço para nova página
+          if (y + heightRequired + footerHeight > pageHeight) {
             doc.addPage();
             y = margin;
             doc.setFillColor(colors.background);
-            doc.rect(0, 0, pageWidth, doc.internal.pageSize.getHeight(), "F");
+            doc.rect(0, 0, pageWidth, pageHeight, "F");
           }
+
+          doc.setFillColor(index % 2 === 0 ? "#ffffff" : "#e9ecef");
+          doc.rect(margin, y, pageWidth - margin * 2, heightRequired, "F");
+
+          x = margin;
+          rowData.forEach((cell, i) => {
+            doc.setTextColor(colors.text);
+            doc.text(cell, x + 2, y + 6);
+            x += colWidths[i];
+          });
+
+          y += heightRequired + 2;
         });
 
-        // Seção de Estatísticas
-        y += 10;
+        // Estatísticas
+        y += 5;
+        if (y + 30 + footerHeight > pageHeight) {
+          doc.addPage();
+          y = margin;
+          doc.setFillColor(colors.background);
+          doc.rect(0, 0, pageWidth, pageHeight, "F");
+        }
+
         doc.setFontSize(12);
         doc.setTextColor(colors.statsHeader);
+        doc.setFont("helvetica", "bold");
         doc.text("ESTATÍSTICAS", margin, y);
         y += 8;
 
@@ -413,33 +407,27 @@ function gerarPDF() {
           (acc, g) => acc + g.membros.length,
           0
         );
-        const statsData = [
+        const stats = [
           ["Total de Grupos", grupos.length],
           ["Total de Membros", totalMembros],
         ];
 
-        doc.setFillColor(colors.header);
-        doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
         doc.setFontSize(10);
-        doc.setTextColor("#FFFFFF");
-        doc.text("Indicador", margin + 2, y + 6);
-        doc.text("Valor", pageWidth - margin - 2, y + 6, { align: "right" });
-        y += 10;
-
-        statsData.forEach(([label, value], idx) => {
-          doc.setFillColor(idx % 2 === 0 ? "#E8F5E9" : "#C8E6C9");
-          doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
+        stats.forEach(([label, val], idx) => {
+          const fill = idx % 2 === 0 ? "#d1e7dd" : "#bcd0c7";
+          doc.setFillColor(fill);
           doc.setTextColor(colors.text);
+          doc.rect(margin, y, pageWidth - margin * 2, 8, "F");
           doc.text(label, margin + 2, y + 6);
-          doc.text(value.toString(), pageWidth - margin - 2, y + 6, {
+          doc.text(val.toString(), pageWidth - margin - 2, y + 6, {
             align: "right",
           });
           y += 10;
         });
 
         // Rodapé
-        const footerY = doc.internal.pageSize.height - 20;
-        const dataEmissao = new Date().toLocaleString("pt-BR", {
+        const footerY = pageHeight - footerHeight + 5;
+        const dataEmissao = new Date().toLocaleString("pt-PT", {
           day: "2-digit",
           month: "2-digit",
           year: "numeric",
@@ -455,20 +443,16 @@ function gerarPDF() {
           footerY
         );
         doc.text(
-          `Created & Designed by Aquilivio Maria`,
+          `Criado por Aquilivio Maria`,
           pageWidth - margin - 2,
           footerY,
-          {
-            align: "right",
-          }
+          { align: "right" }
         );
         doc.text(
           `Emitido em: ${dataEmissao}`,
           pageWidth - margin - 2,
           footerY + 5,
-          {
-            align: "right",
-          }
+          { align: "right" }
         );
 
         doc.save(`relatorio-sorteio-${Date.now()}.pdf`);

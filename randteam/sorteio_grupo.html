@@ -4,13 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorteio de Grupos</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
     <link rel="stylesheet" href="css/grupo.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
     <header class="header">
       <nav class="nav">
-        <a href="../index.html" class="custom-btn">🏠Home</a>
+        <a href="../index.html" class="custom-btn"
+          ><i class="bi bi-house-door"></i> Home</a
+        >
       </nav>
       <h1 id="animated-title">RandTeam - Sorteio de Grupos</h1>
       <a href="../index.html">
@@ -19,29 +29,53 @@
     </header>
 
     <div class="container">
-      <div class="textarea-group">
-        <textarea id="nomes" placeholder="Insira os nomes..."></textarea>
-        <button onclick="limparNomes()" class="custom-btn">Apagar Nomes</button>
-      </div>
-
-      <div class="textarea-group">
-        <textarea id="temas" placeholder="Insira os temas..."></textarea>
-        <button onclick="limparGrupos()" class="custom-btn">
-          Apagar Temas
+      <div class="textarea-group mb-3">
+        <textarea
+          id="nomes"
+          placeholder="Insira os nomes, um por linha..."
+          class="form-control"
+          rows="5"
+        ></textarea>
+        <button onclick="limparNomes()" class="custom-btn btn-secondary mt-2">
+          <i class="bi bi-trash"></i> Apagar Nomes
         </button>
       </div>
 
-      <div id="left">
-        <button onclick="sortearGrupos()" class="custom-btn" id="btnSortear">
-          Sortear
+      <div class="textarea-group mb-3">
+        <textarea
+          id="temas"
+          placeholder="Insira os temas, um por linha..."
+          class="form-control"
+          rows="5"
+        ></textarea>
+        <button onclick="limparGrupos()" class="custom-btn btn-secondary mt-2">
+          <i class="bi bi-trash"></i> Apagar Temas
         </button>
-        <span id="contador" style="margin-left: 10px; display: none"></span>
       </div>
 
-      <div id="resultado"></div>
-      <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
-        Baixar Resultado em PDF
-      </button>
+      <div id="left" class="mb-4">
+        <button
+          onclick="sortearGrupos()"
+          class="custom-btn btn-primary"
+          id="btnSortear"
+        >
+          <i class="bi bi-shuffle"></i> Sortear
+        </button>
+        <span id="contador" class="ms-2" style="display: none"></span>
+      </div>
+
+      <div id="resultado" class="mb-3"></div>
+      <!-- Botão para baixar PDF -->
+      <div class="text-center">
+        <button
+          id="btnDownload"
+          class="btn btn-primary"
+          onclick="gerarPDF()"
+          style="display: none"
+        >
+          <i class="bi bi-file-earmark-pdf"></i> Baixar Resultado em PDF
+        </button>
+      </div>
     </div>
     <script src="js/grupo.js"></script>
   </body>

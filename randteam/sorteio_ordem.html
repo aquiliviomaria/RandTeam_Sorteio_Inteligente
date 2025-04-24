@@ -4,13 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RandTeam - Sorteio de Ordem</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
     <link rel="stylesheet" href="css/ordem.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
     <header class="header">
       <nav class="nav">
-        <a href="../index.html" class="custom-btn">🏠Home</a>
+        <a href="../index.html" class="custom-btn"
+          ><i class="bi bi-house-door"></i> Home</a
+        >
       </nav>
       <h1 id="animated-title">Sorteio de Ordem Aleatória</h1>
       <a href="../index.html">
@@ -19,7 +29,7 @@
     </header>
 
     <main class="container">
-      <div class="theme-container">
+      <div class="theme-container mb-3">
         <input
           type="text"
           id="tema"
@@ -31,34 +41,43 @@
         <div class="textarea-group">
           <textarea
             id="entrada"
+            class="form-control"
+            rows="5"
             placeholder="Insira os participantes, um por linha..."
           ></textarea>
-          <button onclick="limparTodos()" class="custom-btn btn-limpar">
-            Limpar Tudo
+          <button onclick="limparTodos()" class="custom-btn btn-secondary mt-2">
+            <i class="bi bi-trash"></i> Limpar Tudo
           </button>
         </div>
       </div>
 
-      <div class="sorteio-container">
-        <div class="button-group">
-          <button onclick="sortearOrdem()" class="custom-btn btn-sortear">
-            Iniciar Sorteio
+      <div class="sorteio-container text-center">
+        <div class="button-group d-flex flex-column align-items-center">
+          <button onclick="sortearOrdem()" class="custom-btn btn-primary mb-2">
+            <i class="bi bi-shuffle"></i> Iniciar Sorteio
           </button>
-          <span id="contador"></span>
+          <span id="contador" class="fs-5 fw-bold"></span>
         </div>
 
-        <div class="reveal-container">
-          <div id="currentName"></div>
+        <div class="reveal-container my-4">
+          <div id="currentName" class="display-4"></div>
         </div>
 
-        <ul id="resultado"></ul>
+        <ul id="resultado" class="list-unstyled"></ul>
 
-        <button id="btnDownload" class="custom-btn" onclick="gerarPDF()">
-          Baixar Resultado em PDF
-        </button>
+        <!-- Botão para baixar PDF -->
+        <div class="text-center">
+          <button
+            id="btnDownload"
+            class="btn btn-primary"
+            onclick="gerarPDF()"
+            style="display: none"
+          >
+            <i class="bi bi-file-earmark-pdf"></i> Baixar Resultado em PDF
+          </button>
+        </div>
       </div>
     </main>
-
     <script src="js/ordem.js"></script>
   </body>
 </html>

@@ -71,3 +71,34 @@ function hideSections() {
   });
   document.getElementById("inicio-content").style.display = "block";
 }
+
+// Adicionando interação com as imagens dos modos
+document.querySelectorAll(".item img").forEach((img) => {
+  img.addEventListener("click", function () {
+    // Efeito visual de clique
+    this.style.transform = "scale(0.95)";
+    setTimeout(() => {
+      this.style.transform = "scale(1)";
+    }, 200);
+
+    // Mostra tooltip temporário
+    const tooltip = document.createElement("div");
+    tooltip.textContent = "Ver mais detalhes";
+    tooltip.style.position = "absolute";
+    tooltip.style.background = "rgba(0,0,0,0.7)";
+    tooltip.style.color = "white";
+    tooltip.style.padding = "5px 10px";
+    tooltip.style.borderRadius = "5px";
+    tooltip.style.top = this.getBoundingClientRect().top - 40 + "px";
+    tooltip.style.left =
+      this.getBoundingClientRect().left + this.width / 2 - 100 + "px";
+    tooltip.style.width = "200px";
+    tooltip.style.textAlign = "center";
+    tooltip.style.zIndex = "1000";
+    document.body.appendChild(tooltip);
+
+    setTimeout(() => {
+      tooltip.remove();
+    }, 2000);
+  });
+});

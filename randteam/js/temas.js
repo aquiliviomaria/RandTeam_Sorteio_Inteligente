@@ -321,14 +321,14 @@ function gerarPDF() {
 
     // Cores inspiradas no Bootstrap 5
     const colors = {
-      primary: "#0d6efd", // Azul Bootstrap
-      secondary: "#6c757d", // Cinza
-      accent: "#6610f2", // Roxo Bootstrap
-      background: "#f8f9fa", // Branco sujo
-      header: "#343a40", // Cinza escuro
-      text: "#212529", // Preto Bootstrap
-      statsHeader: "#198754", // Verde sucesso
-      footer: "#6c757d", // Cinza Bootstrap
+      primary: "#0d6efd",
+      secondary: "#6c757d",
+      accent: "#6610f2",
+      background: "#f8f9fa",
+      header: "#343a40",
+      text: "#212529",
+      statsHeader: "#198754",
+      footer: "#6c757d",
     };
 
     const margin = 15;
@@ -363,6 +363,7 @@ function gerarPDF() {
 
     const generateContent = () => {
       try {
+        // Configuração inicial do documento
         doc.setFontSize(18);
         doc.setTextColor(colors.primary);
         doc.setFont("helvetica", "bold");
@@ -371,69 +372,93 @@ function gerarPDF() {
         });
         y += 10;
 
-        // Cabeçalho da tabela
-        const headers = ["Grupo", "Tema", "Membros"];
-        const colWidths = [30, 50, 100];
+        // Configurações da tabela
+        const colWidths = [25, 40, 115]; // Larguras ajustadas: Grupo, Tema, Membros
+        const baseRowHeight = 8;
+        const lineSpacing = 4;
         const headerHeight = 8;
-        const rowHeight = 10;
 
+        // Cabeçalho da tabela
         doc.setFillColor(colors.header);
         doc.setTextColor("#ffffff");
         doc.setFontSize(10);
         doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
 
         let x = margin;
-        headers.forEach((header, i) => {
-          doc.text(header, x + 2, y + 6);
-          x += colWidths[i];
-        });
+        doc.text("Grupo", x + 2, y + 6);
+        x += colWidths[0];
+        doc.text("Tema", x + 2, y + 6);
+        x += colWidths[1];
+        doc.text("Membros", x + 2, y + 6);
 
         y += headerHeight + 2;
 
-        doc.setFontSize(9);
-        doc.setTextColor(colors.text);
-
+        // Conteúdo dos grupos
+        doc.setFontSize(9); // Tamanho base para texto
         grupos.forEach((grupo, index) => {
-          const rowData = [
-            `Grupo ${index + 1}: ${grupo.nome}`,
-            grupo.tema || "Tema não definido",
-            grupo.membros?.join(", ") || "Sem membros", // membros separados por vírgulas
-          ];
+          // Prepara os textos com quebras de linha
+          const membrosText = grupo.membros?.join(", ") || "Sem membros";
+          const temaText = grupo.tema || "Tema não definido";
 
-          // Verifica se a próxima linha ultrapassa a área útil
-          const estimatedHeight = rowHeight + 2;
-          if (y + estimatedHeight + rodapeOffset >= pageHeight) {
+          // Calcula quantas linhas cada coluna precisará
+          const membrosLines = doc.splitTextToSize(
+            membrosText,
+            colWidths[2] - 4
+          );
+          const temaLines = doc.splitTextToSize(temaText, colWidths[1] - 4);
+
+          // Determina a altura necessária para a linha (baseada na coluna com mais linhas)
+          const linesNeeded = Math.max(
+            membrosLines.length,
+            temaLines.length,
+            1
+          );
+          const rowHeight = baseRowHeight + (linesNeeded - 1) * lineSpacing;
+
+          // Verifica se precisa de nova página
+          if (y + rowHeight + rodapeOffset >= pageHeight) {
             doc.addPage();
             y = margin;
 
-            // Novo cabeçalho após quebra de página
+            // Recria cabeçalho em nova página
             doc.setFillColor(colors.header);
             doc.setTextColor("#ffffff");
             doc.rect(margin, y, pageWidth - margin * 2, headerHeight, "F");
 
             x = margin;
-            headers.forEach((header, i) => {
-              doc.text(header, x + 2, y + 6);
-              x += colWidths[i];
-            });
+            doc.text("Grupo", x + 2, y + 6);
+            x += colWidths[0];
+            doc.text("Tema", x + 2, y + 6);
+            x += colWidths[1];
+            doc.text("Membros", x + 2, y + 6);
 
             y += headerHeight + 2;
           }
 
-          // Fundo alternado tipo tabela Bootstrap
+          // Fundo alternado para melhor legibilidade
           doc.setFillColor(index % 2 === 0 ? "#ffffff" : "#e9ecef");
           doc.rect(margin, y, pageWidth - margin * 2, rowHeight, "F");
 
-          // Conteúdo
-          x = margin;
-          rowData.forEach((text, i) => {
-            const cellText = doc
-              .splitTextToSize(text, colWidths[i] - 4)
-              .join(", ");
-            doc.setTextColor(colors.text);
-            doc.text(cellText, x + 2, y + 6);
-            x += colWidths[i];
+          // Coluna Grupo (sempre uma linha)
+          doc.setFontSize(9);
+          doc.setTextColor(colors.text);
+          doc.text(`Grupo ${index + 1}: ${grupo.nome}`, margin + 2, y + 6);
+
+          // Coluna Tema (com quebra se necessário)
+          let textY = y + 6;
+          doc.setFontSize(8); // Tamanho menor para texto longo
+          temaLines.forEach((line) => {
+            doc.text(line, margin + colWidths[0] + 2, textY);
+            textY += lineSpacing;
           });
+
+          // Coluna Membros (com quebra)
+          textY = y + 6;
+          membrosLines.forEach((line) => {
+            doc.text(line, margin + colWidths[0] + colWidths[1] + 2, textY);
+            textY += lineSpacing;
+          });
+          doc.setFontSize(9); // Volta ao tamanho original
 
           y += rowHeight + 2;
         });

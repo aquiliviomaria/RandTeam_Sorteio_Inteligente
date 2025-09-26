@@ -1,0 +1,28 @@
+{
+  "name": "RandTeam - Sorteio Inteligente",
+  "short_name": "RandTeam",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#020c1b",
+  "theme_color": "#020c1b",
+  "description": "Sorteios por ordem, grupos, gênero e temas.",
+  "icons": [
+    {
+      "src": "randteam/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "randteam/images/logo.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "randteam/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

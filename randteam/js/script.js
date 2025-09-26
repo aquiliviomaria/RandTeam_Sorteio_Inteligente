@@ -8,6 +8,44 @@ document.addEventListener("DOMContentLoaded", function () {
     title.style.color = colors[index];
     index = (index + 1) % colors.length;
   }, 4000);
+
+  // Hide loader after first paint
+  const loader = document.getElementById("app-loader");
+  if (loader) {
+    setTimeout(() => (loader.style.display = "none"), 500);
+  }
+
+  // Register Service Worker for PWA
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function (err) {
+        console.warn("SW registration failed:", err);
+      });
+    });
+  }
+
+  // Highlight center item in carousel
+  const mainCarousel = document.querySelector('.main');
+  if (mainCarousel) {
+    const items = Array.from(mainCarousel.querySelectorAll('.item'));
+    const updateCenter = () => {
+      const carouselRect = mainCarousel.getBoundingClientRect();
+      const centerX = carouselRect.left + carouselRect.width / 2;
+      let closestItem = null;
+      let closestDist = Infinity;
+      items.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(itemCenter - centerX);
+        if (dist < closestDist) { closestDist = dist; closestItem = item; }
+      });
+      items.forEach((i) => i.classList.remove('is-center'));
+      if (closestItem) { closestItem.classList.add('is-center'); }
+    };
+    updateCenter();
+    mainCarousel.addEventListener('scroll', () => { window.requestAnimationFrame(updateCenter); });
+    window.addEventListener('resize', updateCenter);
+  }
 });
 
 // Menu mobile
